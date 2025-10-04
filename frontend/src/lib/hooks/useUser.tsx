@@ -5,7 +5,7 @@ import { createContext, useContext, useState, useEffect, ReactNode } from 'react
 type UserInfo = {
   age: string;
   race: string;
-  city: string;
+  country: string;
   schoolStatus: string;
 };
 
@@ -19,7 +19,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [userInfo, setUserInfo] = useState<UserInfo>({
     age: '',
     race: '',
-    city: '',
+    country: '',
     schoolStatus: ''
   });
 
@@ -40,7 +40,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     const emptyInfo = {
       age: '',
       race: '',
-      city: '',
+      country: '',
       schoolStatus: ''
     };
     setUserInfo(emptyInfo);
