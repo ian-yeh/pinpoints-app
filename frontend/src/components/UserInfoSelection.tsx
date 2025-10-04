@@ -1,5 +1,6 @@
 "use client";
 import { useUser } from '@/lib/hooks/useUser';
+import { countryOptions } from '@/lib/data/countries';
 
 const UserInfoSelection = () => {
 
@@ -49,16 +50,19 @@ const UserInfoSelection = () => {
         </select>
       </div>
 
-      {/* City Input */}
+      {/* Country Dropdown */}
       <div className="flex items-center justify-between">
-        <label className="text-md font-bold text-foreground">City</label>
-        <input 
-          type="text"
-          value={userInfo.city}
-          onChange={(e) => handleChange('city', e.target.value)}
-          placeholder="Enter your city"
-          className="p-3 bg-bg-dark border border-bg-light rounded-lg text-foreground placeholder-foreground/50 focus:outline-none focus:ring-2 focus:ring-bg-light/50 focus:border-transparent transition-colors"
-        />
+        <label className="text-md font-bold text-foreground">Country</label>
+        <select 
+          value={userInfo.country}
+          onChange={(e) => handleChange('country', e.target.value)}
+          className="p-3 bg-bg border border-bg-light rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-bg-light/50 focus:border-transparent transition-colors"
+        >
+          <option value="">Select country</option>
+          {countryOptions.map(country => (
+            <option key={country} value={country}>{country}</option>
+          ))}
+        </select>
       </div>
 
       {/* School Status Dropdown */}

@@ -1,82 +1,160 @@
 "use client";
-import { useState } from 'react';
-import { Home, TrendingUp, Settings, Menu, X, User, Bell } from 'lucide-react';
+import { Home, ChevronDown } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useUser } from '@/lib/hooks/useUser';
+import { countryOptions } from '@/lib/data/countries';
 
 const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const { userInfo, setUserInfo } = useUser()
+
+  const [isUserInfoExpanded, setIsUserInfoExpanded] = useState(true);
 
   const menuItems = [
     { icon: Home, label: 'Home', href: '/' },
-    { icon: TrendingUp, label: 'Trending', href: '/trending' },
-    { icon: Bell, label: 'Notifications', href: '/notifications' },
-    { icon: User, label: 'Profile', href: '/profile' },
-    { icon: Settings, label: 'Settings', href: '/settings' },
   ];
 
+  const ageOptions = ['18-24', '25-34', '35-44', '45-54', '55-64', '65+'];
+  const raceOptions = ['White', 'Black', 'East Asian', 'First Nations', 'Pacific Islander', 'Multiracial', 'Other', 'Prefer not to say'];
+  const schoolStatusOptions = ['High School', 'Undergraduate', 'Graduate', 'PhD', 'Not a Student', 'Prefer not to say'];
+
+  const handleChange = (field: string, value: string) => {
+    setUserInfo({
+      ...userInfo,
+      [field]: value
+    });
+  };
+
+  useEffect(() => {
+    console.log(userInfo)
+  }, [userInfo])
+  
   return (
     <>
-      {/* Mobile Toggle Button */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="fixed top-4 left-4 z-50 lg:hidden p-2 rounded-lg bg-gray-800 text-white hover:bg-gray-700 transition-colors"
-      >
-        {isOpen ? <X size={24} /> : <Menu size={24} />}
-      </button>
-
-      {/* Overlay for mobile */}
-      {isOpen && (
-        <div
-          onClick={() => setIsOpen(false)}
-          className="fixed inset-0 bg-black/50 z-30 lg:hidden"
-        />
-      )}
-
       {/* Sidebar */}
-      <aside
-        className={`fixed top-0 left-0 h-screen bg-gray-900 text-white z-40 transition-transform duration-300 ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
-        } w-64 lg:translate-x-0`}
+      <motion.aside 
+        className="fixed top-4 left-4 overflow-hidden bg-bg-dark border border-gray-800 shadow-lg text-white z-40 transition-transform duration-300 w-80 rounded-2xl flex flex-col"
+        initial={{ height: 0 }}
+        animate={{ height: 'calc(100vh - 2rem)' }}
+        transition={{ 
+          duration: 1, 
+          ease: [0.76, 0, 0.24, 1] 
+        }}
       >
         <div className="flex flex-col h-full">
           {/* Logo/Header */}
           <div className="p-6 border-b border-gray-800">
             <h1 className="text-2xl font-bold">YourApp</h1>
           </div>
-
+          
           {/* Navigation */}
-          <nav className="flex-1 p-4 space-y-2">
+          <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
             {menuItems.map((item) => {
               const Icon = item.icon;
               return (
-                <a
+                <Link
                   key={item.label}
                   href={item.href}
-                  className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition-colors group"
+                  className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-bg transition-colors group"
                 >
                   <Icon size={20} className="group-hover:scale-110 transition-transform" />
                   <span className="font-medium">{item.label}</span>
-                </a>
+                </Link>
               );
             })}
-          </nav>
 
-          {/* Footer */}
-          <div className="p-4 border-t border-gray-800">
-            <div className="flex items-center gap-3 px-4 py-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                <User size={20} />
-              </div>
-              <div className="flex-1">
-                <p className="font-medium text-sm">John Doe</p>
-                <p className="text-xs text-gray-400">john@example.com</p>
-              </div>
+            {/* User Info Section */}
+            <div className="mt-6 pt-4 border-t border-gray-800">
+              <button
+                onClick={() => setIsUserInfoExpanded(!isUserInfoExpanded)}
+                className="flex items-center justify-between w-full px-4 py-3 rounded-lg hover:bg-bg transition-colors"
+              >
+                <span className="font-medium">User Info</span>
+                <ChevronDown 
+                  size={20} 
+                  className={`transition-transform ${isUserInfoExpanded ? 'rotate-180' : ''}`}
+                />
+              </button>
+
+              {isUserInfoExpanded && (
+                <AnimatePresence>
+                  <motion.div 
+                    className="mt-2 space-y-4 px-2 overflow-hidden"
+                    initial={{ height: 0 }}
+                    animate={{ height: 'auto' }}
+                    exit={{ height: 0 }}
+                    transition={{ 
+                      duration: 0.5, 
+                      ease: [0.76, 0, 0.24, 1] 
+                    }}
+                  >
+                    {/* Age Dropdown */}
+                    <div className="space-y-1">
+                      <label className="text-sm font-bold text-white block px-2">Age</label>
+                      <select 
+                        value={userInfo.age}
+                        onChange={(e) => handleChange('age', e.target.value)}
+                        className="w-full p-2 bg-bg border border-bg-light rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-gray-700/50 focus:border-transparent transition-colors"
+                      >
+                        <option value="">Select age</option>
+                        {ageOptions.map(age => (
+                          <option key={age} value={age}>{age}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* Race/Ethnicity Dropdown */}
+                    <div className="space-y-1">
+                      <label className="text-sm font-bold text-white block px-2">Ethnicity</label>
+                      <select 
+                        value={userInfo.race}
+                        onChange={(e) => handleChange('race', e.target.value)}
+                        className="w-full p-2 bg-bg border border-bg-light rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-gray-700/50 focus:border-transparent transition-colors"
+                      >
+                        <option value="">Select ethnicity</option>
+                        {raceOptions.map(race => (
+                          <option key={race} value={race}>{race}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* Country Dropdown */}
+                    <div className="space-y-1">
+                      <label className="text-sm font-bold text-white block px-2">Country</label>
+                      <select 
+                        value={userInfo.country}
+                        onChange={(e) => handleChange('country', e.target.value)}
+                        className="w-full p-2 bg-bg border border-bg-light rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-gray-700/50 focus:border-transparent transition-colors"
+                      >
+                        <option value="">Select country</option>
+                        {countryOptions.map(country => (
+                          <option key={country} value={country}>{country}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* School Status Dropdown */}
+                    <div className="space-y-1">
+                      <label className="text-sm font-bold text-white block px-2">Employment</label>
+                      <select 
+                        value={userInfo.schoolStatus}
+                        onChange={(e) => handleChange('schoolStatus', e.target.value)}
+                        className="w-full p-2 bg-bg border border-bg-light rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-gray-700/50 focus:border-transparent transition-colors"
+                      >
+                        <option value="">Select your status</option>
+                        {schoolStatusOptions.map(status => (
+                          <option key={status} value={status}>{status}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              )}
             </div>
-          </div>
+          </nav>
         </div>
-      </aside>
-
-      {/* Spacer for main content */}
-      <div className="lg:ml-64" />
+      </motion.aside>
     </>
   );
 };

@@ -29,7 +29,7 @@ export default function Home() {
             {/* LEFT COLUMN */}
             <div className="flex flex-col mt-12">
               <motion.div
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 100, y: 0}}
                 transition={{ duration: 0.5 }}
               >

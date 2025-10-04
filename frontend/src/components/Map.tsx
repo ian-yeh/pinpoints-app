@@ -1,6 +1,7 @@
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, ZoomControl } from 'react-leaflet';
 import { useEffect, useState } from 'react';
 import L from 'leaflet';
+import { mockArticles } from '@/lib/data/data';
 
 const Map = () => {
   const [isClient, setIsClient] = useState(false);
@@ -23,11 +24,7 @@ const Map = () => {
     </div>;
   }
 
-  const points = [
-    { lat: 40.7128, lng: -74.0060, title: 'New York' },
-    { lat: 51.5074, lng: -0.1278, title: 'London' },
-    { lat: 35.6762, lng: 139.6503, title: 'Tokyo' },
-  ];
+  const points = mockArticles;
 
   return (
     <MapContainer 
@@ -35,17 +32,19 @@ const Map = () => {
       zoom={2}
       minZoom={2}
       maxZoom={18}
-      className="h-screen w-full"
+      className="h-screen w-full z-10"
       attributionControl={false}
+      zoomControl={false}
       style={{ background: '#1a1a1a' }}
     >
+      <ZoomControl position={'topright'} />
       <TileLayer 
         url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
         attribution='&copy; OpenStreetMap'
       />
       
       {points.map((point, idx) => (
-        <Marker key={idx} position={[point.lat, point.lng]}>
+        <Marker key={idx} position={[point.coordinates[0], point.coordinates[1]]}>
           <Popup>
             <div className="p-2">
               <h3 className="font-bold">{point.title}</h3>
