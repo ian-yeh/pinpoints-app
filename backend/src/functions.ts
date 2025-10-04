@@ -1,4 +1,6 @@
-import { ArticleBias } from "./datatype";
+import { Article, ArticleBias } from "./datatype";
+
+import { Issue, UserInfo } from "./datatype";
 
 export function parseArticle(info: string): ArticleBias | null {
   try {
@@ -23,4 +25,13 @@ export function parseArticle(info: string): ArticleBias | null {
     console.error("Failed to parse Article:", err);
     return null;
   }
+}
+
+export function formatIssue(issue, article : Article, ): {[key : string] : Issue}{
+    {
+        key: {
+            ...Object.significance,
+            ,url
+        }
+    }
 }

@@ -2,7 +2,7 @@ import { Type } from "@google/genai";
 import { Request, Response } from "express";
 import { AI } from "../server"
 
-import { Issue, ArticleBias } from "../datatype"
+import { ArticleBias } from "../datatype"
 
 import { parseArticle } from "../functions";
 
@@ -10,6 +10,8 @@ import { parseArticle } from "../functions";
 export async function createIssue(req: Request, res: Response) {
 
   const content : string = req.body.content;
+  const user : string = req.body.user;
+  const publication : string = req.body.pub;
 
   try {
     const response = await AI.models.generateContent({
@@ -26,6 +28,42 @@ export async function createIssue(req: Request, res: Response) {
             Title: {
               type: Type.STRING,
               description: `Create an unbiased title representing the content. This title will be used for the issue.`
+            },
+            Summary: {
+              type: Type.ARRAY,
+              description: `Summarize the content so that it is readable. Do not change the content itself. You are allowed to paraphrase.
+              Each string gets one point. This is a concise summary, focusing on the main point.`,
+              items: {
+                type: Type.STRING
+              }
+            },
+            Significance: {
+              type: Type.STRING,
+              description: `Describe why this event is significant to the user based on the user's situation ${user}.
+              Be concise. Explain how it might affect them.`
+            },
+            Suggestion: {
+              type: Type.STRING,
+              description: `Describe what the user should do ${user}. If it does not affect the user tell them ONLY
+              "It does not affect you." Do not give insight on what you think.`
+            },
+            coords: {
+              type: Type.OBJECT,
+              description: `Based on the content and ${publication} estimate the location at which this article applies to.
+              Longitude is represented by y, Latitude is represented by x`,
+              properties: {
+                x: {
+                  type: Type.NUMBER,
+                },
+                y: {
+                  type: Type.NUMBER
+                }
+              }
+            },
+            city: {
+              type: Type.STRING,
+              description: `Based on the chosen x and y coordinates, determine what city it is located in.
+              I only want the name of the city and nothing else.`
             }
           }
         },
@@ -37,7 +75,7 @@ export async function createIssue(req: Request, res: Response) {
   }
   catch (error) {
     console.error(error)
-    res.status(500).json({ message: "Error summarizing article" })
+    res.status(500).json({ message: "Error summarizing issue" })
   }
 }
 

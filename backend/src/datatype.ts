@@ -7,6 +7,14 @@ class Pair{
     }
 }
 
+export type UserInfo = {
+  age: string;
+  race: string;
+  country: string;
+  topic: string;
+  schoolStatus: string;
+};
+
 export interface ArticleBias {
     content: string;
     bias:string;
