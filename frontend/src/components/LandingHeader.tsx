@@ -2,7 +2,7 @@ import Link from 'next/link'
 export default function Header() {
   return (
     <div 
-      className="bg-bg w-full max-w-5xl mx-auto px-8 h-[5vh] flex items-center gap-12 rounded-full py-8 shadow-md"
+      className="bg-bg w-full max-w-5xl mx-auto px-8 h-[5vh] flex items-center gap-12 rounded-full py-8 shadow-lg"
     >
       <div>
         <h1 className="text-2xl font-bold">NEWS SITE</h1>
