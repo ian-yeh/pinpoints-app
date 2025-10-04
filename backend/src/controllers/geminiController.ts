@@ -1,9 +1,6 @@
 import { Type, GoogleGenAI } from "@google/genai";
 import { Request, Response } from "express";
-
-console.log(process.env.GEMINI_API_KEY)
-
-const AI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+import { AI } from "../server"
 
 // Summarize Function
 export async function summarize(req : Request, res : Response) {
