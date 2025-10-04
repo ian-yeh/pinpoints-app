@@ -2,12 +2,7 @@
 "use client"
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
-type UserInfo = {
-  age: string;
-  race: string;
-  country: string;
-  schoolStatus: string;
-};
+import { UserInfo } from '@/lib/types/user';
 
 const UserContext = createContext<{
   userInfo: UserInfo;
@@ -20,7 +15,8 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     age: '',
     race: '',
     country: '',
-    schoolStatus: ''
+    schoolStatus: '',
+    topic: 'Education'
   });
 
   // Load from localStorage on mount
@@ -41,7 +37,8 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       age: '',
       race: '',
       country: '',
-      schoolStatus: ''
+      schoolStatus: '',
+      topic: 'Education'
     };
     setUserInfo(emptyInfo);
     localStorage.removeItem('userInfo');
