@@ -14,6 +14,9 @@ export const mockData: { [key: string]: Issue } = {
     significance: "High",
     coordinates: [34.0522, -118.2437], // Los Angeles, USA
     topic: "economy",
+    city: "Los Angeles",
+    image:
+      "https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=1920&q=80", // Manufacturing facility
     articles: [
       {
         bias: 0.65,
@@ -48,6 +51,9 @@ export const mockData: { [key: string]: Issue } = {
     significance: "Medium",
     coordinates: [53.5444, -113.4909], // Edmonton, Canada
     topic: "agriculture",
+    city: "Edmonton",
+    image:
+      "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&q=80", // Drone over agricultural field
     articles: [
       {
         bias: 0.61,
@@ -82,6 +88,9 @@ export const mockData: { [key: string]: Issue } = {
     significance: "High",
     coordinates: [39.9526, -75.1652], // Philadelphia, USA
     topic: "urban planning",
+    city: "Philadelphia",
+    image:
+      "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1920&q=80", // City skyline urban development
     articles: [
       {
         bias: 0.59,
@@ -116,6 +125,9 @@ export const mockData: { [key: string]: Issue } = {
     significance: "Medium",
     coordinates: [20.6736, -103.3440], // Guadalajara, Mexico
     topic: "culture",
+    city: "Guadalajara",
+    image:
+      "https://images.unsplash.com/photo-1518659103009-40b9045763a4?w=1920&q=80", // Traditional Mexican crafts
     articles: [
       {
         bias: 0.67,
@@ -150,6 +162,9 @@ export const mockData: { [key: string]: Issue } = {
     significance: "High",
     coordinates: [48.4284, -89.2610], // Thunder Bay, Canada
     topic: "healthcare",
+    city: "Thunder Bay",
+    image:
+      "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1920&q=80", // Healthcare consultation
     articles: [
       {
         bias: 0.62,
@@ -184,6 +199,9 @@ export const mockData: { [key: string]: Issue } = {
     significance: "High",
     coordinates: [33.4484, -112.0740], // Phoenix, USA
     topic: "energy",
+    city: "Phoenix",
+    image:
+      "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1920&q=80", // Solar panels in desert
     articles: [
       {
         bias: 0.68,
@@ -218,6 +236,9 @@ export const mockData: { [key: string]: Issue } = {
     significance: "High",
     coordinates: [25.6866, -100.3161], // Monterrey, Mexico
     topic: "environment",
+    city: "Monterrey",
+    image:
+      "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1920&q=80", // Arid desert landscape
     articles: [
       {
         bias: 0.70,
@@ -252,6 +273,9 @@ export const mockData: { [key: string]: Issue } = {
     significance: "Medium",
     coordinates: [45.4215, -75.6972], // Ottawa, Canada
     topic: "urban planning",
+    city: "Ottawa",
+    image:
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80", // Modern office building
     articles: [
       {
         bias: 0.60,

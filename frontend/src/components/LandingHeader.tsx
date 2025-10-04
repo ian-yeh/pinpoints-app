@@ -5,7 +5,7 @@ export default function Header() {
       className="bg-bg w-full max-w-5xl mx-auto px-8 h-[5vh] flex items-center gap-12 rounded-full py-8 shadow-lg"
     >
       <div>
-        <h1 className="text-2xl font-bold">NEWS SITE</h1>
+        <h1 className="text-2xl font-bold">Pinpoints</h1>
       </div>
       <nav>
         <ul className="flex gap-6 text-lg tracking-wide">

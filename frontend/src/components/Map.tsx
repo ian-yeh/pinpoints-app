@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, Marker, Popup, ZoomControl } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, ZoomControl, useMap } from 'react-leaflet';
 import { useEffect, useState } from 'react';
 import L from 'leaflet';
 
@@ -6,15 +6,42 @@ import { mockData } from '@/lib/data/data';
 import { Issue } from '@/lib/types/article';
 import IssuePopup from '@/components/IssuePopup';
 
+import { motion } from 'framer-motion';
+
+const MapController = ({ disabled }: { disabled: boolean }) => {
+  const map = useMap();
+  
+  useEffect(() => {
+    if (disabled) {
+      map.dragging.disable();
+      map.touchZoom.disable();
+      map.doubleClickZoom.disable();
+      map.scrollWheelZoom.disable();
+      map.boxZoom.disable();
+      map.keyboard.disable();
+    } else {
+      map.dragging.enable();
+      map.touchZoom.enable();
+      map.doubleClickZoom.enable();
+      map.scrollWheelZoom.enable();
+      map.boxZoom.enable();
+      map.keyboard.enable();
+    }
+  }, [disabled, map]);
+  
+  return null;
+};
+
 const Map = () => {
   const [isClient, setIsClient] = useState(false);
   const [points, setPoints] = useState<Record<string, Issue>>({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [selectedIssue, setSelectedIssue] = useState<Issue | null>(null);
 
   useEffect(() => {
     setIsClient(true);
-    
+
     // Fix marker icons
     delete (L.Icon.Default.prototype as { _getIconUrl?: () => string })._getIconUrl;
     L.Icon.Default.mergeOptions({
@@ -70,22 +97,48 @@ const Map = () => {
       zoomControl={false}
       style={{ background: '#1a1a1a' }}
     >
+      <MapController disabled={!!selectedIssue} />
       <ZoomControl position={'topright'} />
       <TileLayer 
         url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
         attribution='&copy; OpenStreetMap'
       />
-      
+
       {Object.values(points).map((point: Issue, idx: number) => (
-        <Marker key={idx} position={[point.coordinates[0], point.coordinates[1]]}>
-          <Popup>
-            <IssuePopup 
-              title={point.title}
-              summary={point.summary}
-            />
-          </Popup>
-        </Marker>
+        <Marker
+          key={idx}
+          position={[point.coordinates[0], point.coordinates[1]]}
+          eventHandlers={{
+            click: () => setSelectedIssue(point),
+          }}
+        />
       ))}
+
+      {selectedIssue && (
+        <div 
+          className="fixed inset-0 z-[1000] flex items-center justify-center"
+          onWheel={(e) => e.stopPropagation()}
+          onTouchMove={(e) => e.stopPropagation()}
+          onPointerMove={(e) => e.stopPropagation()}
+        >
+          {/* Backdrop */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.4 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black"
+            onClick={() => setSelectedIssue(null)}
+          />
+
+          {/* Modal content */}
+          <div 
+            className="relative max-w-6xl w-full ml-80 z-10"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <IssuePopup {...selectedIssue} />
+          </div>
+        </div>
+      )}
     </MapContainer>
   );
 };
