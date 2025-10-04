@@ -3,7 +3,7 @@ import *  as gemini from "../controllers/geminiController";
 
 const geminiRouter = express.Router();
 
-geminiRouter.post("/summarize", gemini.summarize);
+geminiRouter.post("/issue", gemini.createIssue);
 
 geminiRouter.get("/article", gemini.URLReader);
 

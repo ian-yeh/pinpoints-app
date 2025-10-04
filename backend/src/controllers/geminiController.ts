@@ -2,74 +2,37 @@ import { Type } from "@google/genai";
 import { Request, Response } from "express";
 import { AI } from "../server"
 
-import { Summary, Article } from "../datatype"
+import { Issue, ArticleBias } from "../datatype"
 
 import { parseArticle } from "../functions";
 
-// Summarize Function
-export async function summarize(req: Request, res: Response) {
+// creates the issue
+export async function createIssue(req: Request, res: Response) {
 
-  const { title, bias, author, date, content } = req.body as {
-    bias: string;
-    title: string;
-    author: string;
-    date: string;
-    content: string;
-  };
+  const content : string = req.body.content;
 
   try {
     const response = await AI.models.generateContent({
       model: "gemini-2.5-flash",
-      contents:
-        `Summarize the following article clearly and objectively.
-        Include:
-
-        The main topic and key points as items in keypoints
-
-        The author's main argument or conclusion. This goes in authoridea
-
-        Any signs of bias, tone, or political leaning (e.g., choice of language, omissions, framing). This goes in political side.
-
-        The overall significance or context of the article. This goes in significance.
-
-        Use a ${bias} view, factual tone in your response.
-
-        Article Information:
-
-        Title: ${title}
-
-        Author: ${author}
-
-        Date: ${date}
-
-        Article Text:
-        ${content}`,
+      contents: content,
       config: {
-        systemInstruction: `You are an educator that is ${bias}. You have no name and are only a summarizer.`,
+        systemInstruction: `Your name is Poly. You are an educator that is unbiased. 
+        You are teaching the user about the content.
+        You must fill out the response schema based on the instructions in the description`,
         responseMimeType: "application/json",
         responseSchema: {
           type: Type.OBJECT,
           properties: {
-            keypoints: {
-              type: Type.ARRAY,
-              items: { type: Type.STRING }
-            },
-            authoridea: {
-              type: Type.STRING
-            },
-            politicalside: {
-              type: Type.STRING
-            },
-            significance: {
-              type: Type.STRING
+            Title: {
+              type: Type.STRING,
+              description: `Create an unbiased title representing the content. This title will be used for the issue.`
             }
-          },
-          propertyOrdering: ["keypoints", "authoridea", "politicalside", "significance"]
+          }
         },
       },
     });
 
-    let data: Summary | undefined = JSON.parse(response.text || "{}")
+    let data = JSON.parse(response.text || "{}")
     res.json({ summary: data })
   }
   catch (error) {
@@ -81,6 +44,10 @@ export async function summarize(req: Request, res: Response) {
 // Feedback on how user should act
 export async function feedback() {
 
+}
+
+// Get all the keywords about a user's interests
+export async function keywords(){
 }
 
 // Reads the URL of an article and scans for context and information
@@ -95,17 +62,23 @@ export async function URLReader(req: Request, res: Response) {
         Content: Read the content in the article, DO NOT rephrase anything or add any extra words than what you have read.
         Take key parts of the article and create a chunk of text that is DIRECTLY quoted from the article. Text does not have
         to be grammarly correct, it should not be quoted or annotated.
-        Bias: Analyze the bias of the article and catogorize it into a political view point. This is a couple word response.
+        Bias: Analyze the bias of the article and catogorize it into a political view point. Progressive at 0 Conservative at 1.
+        This should only be a number response, you have 2 significant figures. It does not have to be a good looking number.
+        Justification: Maximum 2 sentences on why you chose the bias number. You are allowed to interpret information here.
         `,
       config: {
         systemInstruction: `You are a reader, you do not form opinions. All you do is read and take key parts of an article.`,
         tools: [{ urlContext: {} }],
       },
     });
+    console.log(response.text)
     if(response.text !== undefined){
-      const article : Article | null = parseArticle(response.text);
+      const article : ArticleBias | null = parseArticle(response.text);
 
       res.json({ info:  article});
+    }
+    else{
+      throw new Error("Cannot access site")
     }
   }
   catch (Error) {
