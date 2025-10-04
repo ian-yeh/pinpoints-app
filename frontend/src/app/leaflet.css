@@ -1,0 +1,22 @@
+@import 'leaflet/dist/leaflet.css';
+
+/* Fix for marker icons */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Custom popup styling for dark theme */
+.leaflet-popup-content-wrapper {
+  background-color: #1f2937;
+  color: white;
+}
+
+.leaflet-popup-tip {
+  background-color: #1f2937;
+}
+
+/* Remove default marker shadow if using custom markers */
+.custom-marker .leaflet-marker-shadow {
+  display: none;
+}
