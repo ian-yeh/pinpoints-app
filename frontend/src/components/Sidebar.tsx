@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useUser } from '@/lib/hooks/useUser';
 import { countryOptions } from '@/lib/data/countries';
+import Logo from './Logo';
 
 const Sidebar = () => {
   const { userInfo, setUserInfo } = useUser()
@@ -45,7 +46,7 @@ const Sidebar = () => {
         <div className="flex flex-col h-full">
           {/* Logo/Header */}
           <div className="p-6 border-b border-gray-800">
-            <h1 className="text-2xl font-bold">YourApp</h1>
+            <Logo />
           </div>
           
           {/* Navigation */}
