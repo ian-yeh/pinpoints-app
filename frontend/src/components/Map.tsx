@@ -1,10 +1,16 @@
 import { MapContainer, TileLayer, Marker, Popup, ZoomControl } from 'react-leaflet';
 import { useEffect, useState } from 'react';
 import L from 'leaflet';
-import { mockArticles } from '@/lib/data/data';
+
+import { mockData } from '@/lib/data/data';
+import { Issue } from '@/lib/types/article';
+import IssuePopup from '@/components/IssuePopup';
 
 const Map = () => {
   const [isClient, setIsClient] = useState(false);
+  const [points, setPoints] = useState<Record<string, Issue>>({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     setIsClient(true);
@@ -16,7 +22,30 @@ const Map = () => {
       iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
       shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
     });
-  }, []);
+
+    // Fetch articles
+    const fetchArticles = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('/api/articles'); // Adjust your API endpoint
+        if (!response.ok) {
+          throw new Error('Failed to fetch articles');
+        }
+        const data = await response.json();
+        setPoints(data);
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred';
+        setError(errorMessage);
+        // Fallback to mock data if needed
+        setPoints(mockData);
+        console.log(error)
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchArticles();
+  }, [error]);
 
   if (!isClient) {
     return <div className="h-screen w-full bg-gray-900 flex items-center justify-center">
@@ -24,7 +53,11 @@ const Map = () => {
     </div>;
   }
 
-  const points = mockArticles;
+  if (loading) {
+    return <div className="h-screen w-full bg-gray-900 flex items-center justify-center">
+      <p className="text-white">Loading articles...</p>
+    </div>;
+  }
 
   return (
     <MapContainer 
@@ -43,12 +76,13 @@ const Map = () => {
         attribution='&copy; OpenStreetMap'
       />
       
-      {points.map((point, idx) => (
+      {Object.values(points).map((point: Issue, idx: number) => (
         <Marker key={idx} position={[point.coordinates[0], point.coordinates[1]]}>
           <Popup>
-            <div className="p-2">
-              <h3 className="font-bold">{point.title}</h3>
-            </div>
+            <IssuePopup 
+              title={point.title}
+              summary={point.summary}
+            />
           </Popup>
         </Marker>
       ))}
