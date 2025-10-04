@@ -26,7 +26,7 @@ export function parseArticle(info: string): ArticleBias | null {
     return null;
   }
 }
-
+/*
 export function formatIssue(issue, article : Article, ): {[key : string] : Issue}{
     {
         key: {
@@ -34,4 +34,4 @@ export function formatIssue(issue, article : Article, ): {[key : string] : Issue
             ,url
         }
     }
-}
+}*/
