@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import newsRouter from "./routes/newsRoutes";
+import geminiRouter from "./routes/geminiRoutes";
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/news", newsRouter);
+app.use("/api/gemini", geminiRouter);
 
 console.log(process.env.CURRENTS_API_KEY);
 app.listen(PORT, () => {
