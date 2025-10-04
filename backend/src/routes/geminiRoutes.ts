@@ -3,6 +3,6 @@ import *  as gemini from "../controllers/geminiController";
 
 const geminiRouter = express.Router();
 
-geminiRouter.get("/summarize", gemini.summarize);
+geminiRouter.post("/summarize", gemini.summarize);
 
 export default geminiRouter;
