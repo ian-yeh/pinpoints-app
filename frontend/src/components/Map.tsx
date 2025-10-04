@@ -1,16 +1,17 @@
-import { MapContainer, TileLayer, Marker, Popup, ZoomControl, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, ZoomControl, useMap } from 'react-leaflet';
 import { useEffect, useState } from 'react';
 import L from 'leaflet';
 
 import { mockData } from '@/lib/data/data';
 import { Issue } from '@/lib/types/article';
 import IssuePopup from '@/components/IssuePopup';
+import { useUser } from '@/lib/hooks/useUser';
 
 import { motion } from 'framer-motion';
 
 const MapController = ({ disabled }: { disabled: boolean }) => {
   const map = useMap();
-  
+
   useEffect(() => {
     if (disabled) {
       map.dragging.disable();
@@ -28,7 +29,7 @@ const MapController = ({ disabled }: { disabled: boolean }) => {
       map.keyboard.enable();
     }
   }, [disabled, map]);
-  
+
   return null;
 };
 
@@ -38,6 +39,7 @@ const Map = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [selectedIssue, setSelectedIssue] = useState<Issue | null>(null);
+  const { userInfo  } = useUser();
 
   useEffect(() => {
     setIsClient(true);
@@ -54,7 +56,13 @@ const Map = () => {
     const fetchArticles = async () => {
       try {
         setLoading(true);
-        const response = await fetch('/api/articles'); // Adjust your API endpoint
+        const response = await fetch('/api/issue', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(userInfo),
+        }); 
         if (!response.ok) {
           throw new Error('Failed to fetch articles');
         }
@@ -72,7 +80,7 @@ const Map = () => {
     };
 
     fetchArticles();
-  }, [error]);
+  }, [error, userInfo]);
 
   if (!isClient) {
     return <div className="h-screen w-full bg-gray-900 flex items-center justify-center">
