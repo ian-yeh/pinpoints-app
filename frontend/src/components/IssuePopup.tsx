@@ -1,10 +1,51 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { RevealAnimation } from "./RevealAnimation";
 import Image from "next/image";
 import { Issue } from "@/lib/types/article";
 import ArticleCard from "@/components/ArticleCard";
+import { useUser } from "@/lib/hooks/useUser";
 
-const IssuePopup = ({ title, whatToDo, summary, city, image, articles }: Issue ) => {
+const IssuePopup = ({ title, summary, city, image, articles }: Issue ) => {
+  const { userInfo } = useUser();
+  const [whatToDo, setWhatToDo] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+
+    const fetchImpacts = async () => {
+      if (!userInfo) return;
+
+      setIsLoading(true);
+      try {
+        const response = await fetch('/api/issue/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            content: summary,
+            user: JSON.stringify(userInfo), // Send user context
+            issueTitle: title
+          }),
+        });
+
+        if (!response.ok) throw new Error('Failed to fetch guidance');
+
+        const data = await response.json();
+        setWhatToDo(data.whatToDo);
+      } catch (error) {
+        console.error('Error fetching guidance:', error);
+        setWhatToDo(['Unable to generate personalized guidance at this time.']);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchImpacts();
+  }, [userInfo, summary, title])
+
+
   return (
     <motion.div 
       initial={{ width: 0 }}
@@ -28,13 +69,22 @@ const IssuePopup = ({ title, whatToDo, summary, city, image, articles }: Issue )
               <RevealAnimation delay={0.9}>
                 <h3 className="text-2xl font-bold">How does this affect you?</h3>
               </RevealAnimation>
-              <RevealAnimation delay={1.2}>
-                <ul className="text-gray-300 text-base leading-relaxed space-y-2">
-                  {whatToDo.map((item: string, index: number) => (
-                    <li key={index} className="list-disc list-inside">{item}</li>
-                  ))}
-                </ul>
-              </RevealAnimation>
+                {isLoading ? (
+                  <div>
+                  <RevealAnimation delay={1.4}>
+                    <p className="text-md">Generating content...</p>
+                  </RevealAnimation>
+                </div>
+                ): (
+                <RevealAnimation>
+                  <ul className="text-gray-300 text-base leading-relaxed space-y-2">
+                    {whatToDo.map((item: string, index: number) => (
+                      <li key={index} className="list-disc list-inside">{item}</li>
+                    ))}
+                  </ul>
+                </RevealAnimation>
+                )
+                }
             </div>
           </div>
           <div className="pl-4">

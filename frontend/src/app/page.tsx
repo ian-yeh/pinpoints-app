@@ -23,57 +23,59 @@ export default function Home() {
       <div className='h-[20vh] flex flex-col items-center justify-center'>
         <Header />
       </div>
-      
+
       {/* MAIN LANDING CONTENT - Takes remaining space and centers */}
       <div className="flex-1 flex">
-          <div className="grid grid-cols-2 w-full px-30 gap-16">
-            {/* LEFT COLUMN */}
-            <div className="flex flex-col mt-12">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 100, y: 0}}
-                transition={{ duration: 0.5 }}
-              >
+        <div className="grid grid-cols-2 w-full px-30 gap-16">
+          {/* LEFT COLUMN */}
+          <div className="flex flex-col mt-12">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 100, y: 0}}
+              transition={{ duration: 0.5 }}
+            >
               <h1 className='font-extrabold text-[64px] tracking-tight leading-relaxed'>
-                Your world is changing. <span className="bg-gradient-to-r from-foreground to-gray-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-red-600 to-white bg-clip-text text-transparent">
+                  Canada
+                </span> is changing. <span className="bg-gradient-to-r from-foreground to-gray-400 bg-clip-text text-transparent">
                   Stay ahead of it.
                 </span>
               </h1>
               <h3 className='mt-8 text-xl font-light tracking-wide'>
-                Every issue. Every perspective. Zero bias. Just the truth you need to make informed decisions.
+                Just the truth you need to make informed decisions, from Canada&apos;s most <span className='font-bold'>reputable</span> sources.
               </h3>
-              </motion.div>
-              <motion.div 
+            </motion.div>
+            <motion.div 
               initial={{ width: 0 }}
               animate={{ width: "auto" }}
               transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
-              >
-                <Spectrum />
-              </motion.div>
-            </div>
+            >
+              <Spectrum />
+            </motion.div>
+          </div>
 
           {/* RIGHT COLUMN */}
           <RevealAnimation>
             <div className="flex flex-col mt-12 items-center">
-                <div className='w-1/2 border-[1px] border-bg-light rounded-3xl p-6'>
-                  <h1 className="text-2xl font-semibold mb-2 tracking-tight">
-                    Tell us about yourself
-                  </h1>
-                  <div className="space-y-6">
-                    <p className="text-lg text-foreground/70 leading-relaxed">
-                      Let us find a personalized experience for you.
-                    </p>
-                    <UserInfoSelection />
-                    <div className='text-left block mx-auto'>
-                      <button 
-                        className="bg-bg text-foreground px-4 py-2 border-[0.5px] border-bg-light/40 rounded-lg font-medium hover:bg-bg-light/80 transition-colors"
-                        onClick={handleEnter}
-                      >
-                        Enter Site
-                      </button>
-                    </div>
+              <div className='w-1/2 border-[1px] border-bg-light rounded-3xl p-6'>
+                <h1 className="text-2xl font-semibold mb-2 tracking-tight">
+                  Tell us about yourself
+                </h1>
+                <div className="space-y-6">
+                  <p className="text-lg text-foreground/70 leading-relaxed">
+                    Let us find a personalized experience for you.
+                  </p>
+                  <UserInfoSelection />
+                  <div className='text-left block mx-auto'>
+                    <button 
+                      className="bg-bg text-foreground px-4 py-2 border-[0.5px] border-bg-light/40 rounded-lg font-medium hover:bg-bg-light/80 transition-colors"
+                      onClick={handleEnter}
+                    >
+                      Enter Site
+                    </button>
                   </div>
                 </div>
+              </div>
             </div>
           </RevealAnimation>
 

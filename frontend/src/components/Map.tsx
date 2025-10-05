@@ -8,7 +8,28 @@ import IssuePopup from '@/components/IssuePopup';
 import { useUser } from '@/lib/hooks/useUser';
 
 import { motion } from 'framer-motion';
+import { EducationData } from '@/lib/data/education-data';
+import { PolicyData } from '@/lib/data/policy-data';
+import { ClimateData } from '@/lib/data/climate-data';
 
+const MapAnimator = ({ topic }: { topic: string }) => {
+  const map = useMap();
+
+  useEffect(() => {
+    // Canada's approximate center coordinates
+    const canadaCenter: [number, number] = [56.1304, -106.3468];
+    const canadaZoom = 4;
+
+    // Animate zoom to Canada
+    map.setView(canadaCenter, canadaZoom, {
+      animate: true,
+      duration: 1.5,
+      easeLinearity: 0.25
+    });
+  }, [topic, map]); // Runs whenever topic changes
+
+  return null;
+};
 
 const MapController = ({ disabled }: { disabled: boolean }) => {
   const map = useMap();
@@ -36,14 +57,14 @@ const MapController = ({ disabled }: { disabled: boolean }) => {
 
 const Map = () => {
   const [isClient, setIsClient] = useState(false);
-  const [points, setPoints] = useState<Record<string, Issue>>({});
+  const [points, setPoints] = useState<Issue[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
   const [selectedIssue, setSelectedIssue] = useState<Issue | null>(null);
   const { userInfo  } = useUser();
 
   useEffect(() => {
     setIsClient(true);
+    setPoints([])
 
     // Fix marker icons
     delete (L.Icon.Default.prototype as { _getIconUrl?: () => string })._getIconUrl;
@@ -52,36 +73,18 @@ const Map = () => {
       iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
       shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
     });
+    if (userInfo.topic === "War") {
+      setPoints(EducationData);
+    } else if (userInfo.topic === "Policy") {
+      setPoints(PolicyData);
+    } else if (userInfo.topic === "Climate") {
+      setPoints(ClimateData);
+    } else {
+      setPoints(EducationData); // Default fallback
+    }
+    setLoading(false);
 
-    // Fetch articles
-    const fetchArticles = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch('/api/issue', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(userInfo),
-        }); 
-        if (!response.ok) {
-          throw new Error('Failed to fetch articles');
-        }
-        const data = await response.json();
-        setPoints(data);
-      } catch (err) {
-        const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred';
-        setError(errorMessage);
-        // Fallback to mock data if needed
-        setPoints(mockData);
-        console.log(error)
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchArticles();
-  }, [error, userInfo]);
+  }, [userInfo]);
 
   if (!isClient) {
     return <div className="h-screen w-full bg-gray-900 flex items-center justify-center">
@@ -107,6 +110,7 @@ const Map = () => {
       style={{ background: '#1a1a1a' }}
     >
       <MapController disabled={!!selectedIssue} />
+      <MapAnimator topic={userInfo.topic} /> {/* Add this */}
       <ZoomControl position={'topright'} />
       <TileLayer 
         url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
