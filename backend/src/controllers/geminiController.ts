@@ -2,85 +2,46 @@ import { Type } from "@google/genai";
 import { Request, Response } from "express";
 import { AI } from "../server"
 
-import { Bias } from "../datatype"
+import { Bias, Issue, UserInfo } from "../datatype"
 
 import { parseArticle } from "../functions";
 
 // creates the issue
 export async function createIssue(req: Request, res: Response) {
 
-  const content : string = req.body.content;
-  const user : string = req.body.user;
-  const publication : string = req.body.pub;
+  const content : Issue = req.body.content;
+  const user : UserInfo = req.body.user;
 
   try {
     const response = await AI.models.generateContent({
       model: "gemini-2.5-flash",
-      contents: [content],
+      contents: [JSON.stringify(content)],
       config: {
         systemInstruction: `Your name is Poly. You are an educator that is unbiased. 
-        You are teaching the user about the content.
+        You are teaching the user about the content. You are advising them about it.
         You must fill out the response schema based on the instructions in the description`,
         responseMimeType: "application/json",
         responseSchema: {
           type: Type.OBJECT,
           properties: {
-            title: {
-              type: Type.STRING,
-              description: `Create an unbiased title representing the content. This title will be used for the issue.`
-            },
-            summary: {
-              type: Type.ARRAY,
-              description: `Summarize the content so that it is readable. Do not change the content itself. You are allowed to paraphrase.
-              Each string gets one point. This is a concise summary, focusing on the main point.`,
-              items: {
-                type: Type.STRING
-              }
-            },
-            significance: {
-              type: Type.STRING,
-              description: `Describe why this event is significant to the user based on the user's situation ${user}.
-              Be concise. Explain how it might affect them.`
-            },
             whatToDo: {
               type: Type.STRING,
-              description: `Describe what the user should do ${user}. If it does not affect the user tell them ONLY
-              "It does not affect you." Do not give insight on what you think.`
+              description: `Describe what the user should do ${user}. If it does not affect the user tell them
+              "It does not affect you." Do give insight on what you think.`
             },
-            coordinates: {
-              type: Type.ARRAY,
-              description: `Based on the content and ${publication} estimate the location at which this article applies to.
-              Longitude is represented by y, Latitude is represented by x, return an array of [x, y], where x and y are numbers, and nothing else.`,
-              items: {
-                type: Type.NUMBER
-              }
-            },
-            city: {
-              type: Type.STRING,
-              description: `Based on the chosen x and y coordinates, determine what city it is located in.
-              I only want the name of the city and nothing else.`
-            }
           }
         },
       },
     });
-
-    let data = JSON.parse(response.text || "{}")
-    res.json({data})
+    if(response !== undefined){
+      let data = response.text;
+      res.json({data})
+    }
   }
   catch (error) {
     console.error(error)
     res.status(500).json({ message: "Error summarizing issue" })
   }
-}
-
-// Feedback on how user should act
-export async function feedback() {
-
-}
-
-// Get all the keywords about a user's interests
-export async function keywords(){
 }
 
 // Reads the URL of an article and scans for context and information
