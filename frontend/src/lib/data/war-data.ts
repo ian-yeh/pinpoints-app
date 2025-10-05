@@ -1,340 +1,178 @@
-import { Issue } from "../types/article";
+import { Issue } from "../types/article"
 
 export const WarData: Issue[] = [
   {
-    title: "Ukraine-Russia Conflict Enters Fourth Year with Stalemate",
-    summary:
-      "The war in Ukraine continues with neither side achieving decisive victories, as international aid packages remain contested and civilian infrastructure faces ongoing attacks. Millions remain displaced across Europe.",
-    whatToDo: [
-      "Continued refugee crisis affecting European nations",
-      "Global energy and food price volatility",
-      "Increased military spending across NATO countries",
-      "Risk of conflict escalation or expansion into neighboring regions"
-    ],
-    significance: "High",
-    coordinates: [50.4501, 30.5234], // Kyiv, Ukraine
+    title: "Canadian Armed Forces Personnel Crisis: 14,000 Member Shortfall",
+    summary: "The Canadian Armed Forces faces a critical personnel shortage of up to 14,000 members across regular and reserve forces as of 2025. Despite meeting overall recruiting goals in fiscal 2024-25, retention remains a major challenge with new recruits quickly leaving. The military has relaxed medical screening to accept recruits with asthma and ADHD, and launched a new online recruitment portal, but implementation problems persist. High attrition rates driven by job dissatisfaction, limited career progression, and work-life balance issues continue to undermine operational readiness.",
+    whatToDo: [],
+    coordinates: [45.4215, -75.6972], // Ottawa, Canada
     topic: "War",
-    city: "Kyiv",
-    image: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=1920&q=80",
+    city: "Ottawa",
+    image: "https://images.unsplash.com/photo-1551135049-8a33b5883817?w=1920&q=80",
     articles: [
       {
-        bias: 0.50,
-        url: "https://www.reuters.com/world/europe/ukraine-russia-war-2025-analysis/",
-        title: "Ukraine war enters fourth year with no end in sight",
-        publication: "Reuters"
-      },
-      {
-        bias: 0.55,
-        url: "https://www.bbc.com/news/world-europe-ukraine-conflict-update-2025",
-        title: "The humanitarian cost of Ukraine's prolonged conflict",
-        publication: "BBC News"
-      },
-      {
-        bias: 0.60,
-        url: "https://www.aljazeera.com/news/ukraine-russia-military-situation-2025",
-        title: "Stalemate continues as both sides dig in for long war",
-        publication: "Al Jazeera"
+        bias: 0.35,
+        url: "https://www.cbc.ca/news/politics/military-retention-program-defunding-1.7536509",
+        title: "Leaked report shows many new military recruits are quickly leaving",
+        publication: "CBC News"
       },
       {
         bias: 0.50,
-        url: "https://www.nato.int/cps/en/natohq/ukraine-support-2025.htm",
-        title: "NATO's continued support for Ukraine: 2025 overview",
-        publication: "NATO"
-      }
+        url: "https://www.ctvnews.ca/canada/military-recruitment-crisis-shortage",
+        title: "Canadian Armed Forces facing 16,000 member shortage crisis",
+        publication: "CTV News"
+      },
+      {
+        bias: 0.45,
+        url: "https://globalnews.ca/news/11181508/canadian-armed-forces-recruitment-portal-problems/",
+        title: "Canadian military's new recruitment tool faces rollout problems",
+        publication: "Global News"
+      },
     ]
   },
   {
-    title: "Israel-Hamas Conflict Sparks Regional Tensions in Middle East",
-    summary:
-      "Ongoing hostilities between Israel and Hamas continue to destabilize the region, with humanitarian concerns in Gaza, increased Hezbollah activity in Lebanon, and fears of broader regional escalation involving Iran.",
-    whatToDo: [
-      "Severe humanitarian crisis with limited aid access to Gaza",
-      "Risk of multi-front conflict expanding across the region",
-      "Increased sectarian tensions affecting Middle Eastern stability",
-      "Global diplomatic divisions and strained international relations"
-    ],
-    significance: "High",
-    coordinates: [31.7683, 35.2137], // Jerusalem
+    title: "Canada Commits to NATO 5% GDP Defence Spending by 2035",
+    summary: "At the June 2025 NATO Summit in The Hague, Canada joined allies in committing to invest 5% of GDP annually on defence by 2035, with at least 3.5% on core defence requirements. The Carney government announced defence spending would reach 2% of GDP (approximately $63 billion) in 2025-26, representing a cash increase of over $9 billion. This marks a dramatic shift from Canada's previous position below 2%, responding to NATO pressure and the deteriorating global security environment including Russia's war in Ukraine.",
+    whatToDo: [],
+    coordinates: [45.4235, -75.6990], // Ottawa, Canada (slightly staggered)
     topic: "War",
-    city: "Jerusalem",
-    image: "https://images.unsplash.com/photo-1552799446-159ba9523315?w=1920&q=80",
+    city: "Ottawa",
+    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1920&q=80",
     articles: [
       {
-        bias: 0.50,
-        url: "https://www.reuters.com/world/middle-east/israel-gaza-conflict-2025/",
-        title: "Israel-Gaza conflict continues amid ceasefire efforts",
-        publication: "Reuters"
-      },
-      {
-        bias: 0.55,
-        url: "https://www.aljazeera.com/news/middle-east/israel-palestine-humanitarian-crisis",
-        title: "Gaza faces mounting humanitarian catastrophe",
-        publication: "Al Jazeera"
-      },
-      {
-        bias: 0.60,
-        url: "https://www.bbc.com/news/world-middle-east-israel-hamas-regional-impact",
-        title: "How the Israel-Hamas war is reshaping the Middle East",
-        publication: "BBC News"
+        bias: 0.35,
+        url: "https://www.cbc.ca/news/politics/nato-secretary-general-canada-denfence-spending-target-1.7563893",
+        title: "NATO head 'fairly confident' Canada will hit new defence spending target",
+        publication: "CBC News"
       },
       {
         bias: 0.50,
-        url: "https://www.un.org/unispal/humanitarian-situation-gaza-2025/",
-        title: "Humanitarian situation in Gaza: UN report",
-        publication: "United Nations"
-      }
+        url: "https://www.ctvnews.ca/politics/canada-nato-defence-spending-commitment",
+        title: "Canada commits to 5% GDP defence spending by 2035",
+        publication: "CTV News"
+      },
+      {
+        bias: 0.45,
+        url: "https://globalnews.ca/news/canada-nato-summit-defence-investment/",
+        title: "Canada joins new NATO Defence Investment Pledge",
+        publication: "Global News"
+      },
     ]
   },
   {
-    title: "Sudan Civil War Triggers Africa's Largest Displacement Crisis",
-    summary:
-      "Fighting between the Sudanese Armed Forces and Rapid Support Forces has displaced over 10 million people, creating a massive humanitarian emergency while international attention remains focused elsewhere.",
-    whatToDo: [
-      "Over 10 million displaced, creating refugee burden on neighboring countries",
-      "Widespread famine and disease outbreaks",
-      "Breakdown of healthcare and education systems",
-      "Risk of regional destabilization across East Africa"
-    ],
-    significance: "High",
-    coordinates: [15.5007, 32.5599], // Khartoum, Sudan
+    title: "Defence Investment Agency Launched to Accelerate Military Procurement",
+    summary: "On October 2, 2025, Prime Minister Carney launched the new Defence Investment Agency to streamline military procurement and eliminate duplicative approvals and red tape. The agency aims to shift Canada from defence procurement to defence production, rebuilding the domestic defence industrial base. This represents the government's response to decades of procurement delays and cost overruns that left the military with aging equipment. The agency's first phase focuses on standing up the organization and deploying initial capabilities.",
+    whatToDo: [],
+    coordinates: [45.4195, -75.6950], // Ottawa, Canada (slightly staggered)
     topic: "War",
-    city: "Khartoum",
-    image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=1920&q=80",
+    city: "Ottawa",
+    image: "https://images.unsplash.com/photo-1519452635265-7b1fbfd1e4e0?w=1920&q=80",
     articles: [
       {
-        bias: 0.50,
-        url: "https://www.reuters.com/world/africa/sudan-civil-war-displacement-crisis-2025/",
-        title: "Sudan's forgotten war creates massive displacement crisis",
-        publication: "Reuters"
-      },
-      {
-        bias: 0.55,
-        url: "https://www.bbc.com/news/world-africa-sudan-humanitarian-emergency",
-        title: "Sudan: The world's worst humanitarian crisis you're not hearing about",
-        publication: "BBC News"
-      },
-      {
-        bias: 0.60,
-        url: "https://www.aljazeera.com/news/africa/sudan-conflict-regional-impact",
-        title: "Sudan's civil war threatens to destabilize entire region",
-        publication: "Al Jazeera"
+        bias: 0.35,
+        url: "https://www.cbc.ca/news/politics/canada-defence-investment-agency-1.7648729",
+        title: "Canada announces Defence Investment Agency to manage military equipment",
+        publication: "CBC News"
       },
       {
         bias: 0.50,
-        url: "https://www.unhcr.org/news/sudan-crisis-2025-update",
-        title: "Sudan crisis: Displacement and humanitarian needs",
-        publication: "UNHCR"
-      }
+        url: "https://www.ctvnews.ca/politics/defence-procurement-agency-launch",
+        title: "New agency aims to speed up military equipment purchases",
+        publication: "CTV News"
+      },
+      {
+        bias: 0.45,
+        url: "https://globalnews.ca/news/defence-investment-agency-canada/",
+        title: "Government launches agency to overhaul defence procurement",
+        publication: "Global News"
+      },
     ]
   },
   {
-    title: "Myanmar Military Junta Loses Control of Strategic Territories",
-    summary:
-      "Myanmar's military government faces unprecedented territorial losses as ethnic armed groups and pro-democracy forces capture key border regions, intensifying the civil conflict that began with the 2021 coup.",
-    whatToDo: [
-      "Continued persecution of Rohingya and other ethnic minorities",
-      "Massive internal displacement and refugee flows to Thailand/Bangladesh",
-      "Economic collapse and breakdown of public services",
-      "Potential for complete state fragmentation"
-    ],
-    significance: "Medium",
-    coordinates: [16.8661, 96.1951], // Yangon, Myanmar
+    title: "Canada Provides $2 Billion in Military Assistance to Ukraine",
+    summary: "Canada has significantly increased military support to Ukraine throughout 2025, including $440 million announced in January, $500 million through NATO's PURL initiative in August, and a total of $2 billion in military assistance announced at the G7 Summit in Kananaskis, Alberta. Support includes armoured vehicles, ammunition, and equipment sourced from the United States and other allies. Canada also provided $2.3 billion in loans for Ukraine's infrastructure rebuilding, demonstrating ongoing commitment to Ukraine's defence against Russian aggression.",
+    whatToDo: [],
+    coordinates: [51.0447, -114.0719], // Calgary, Canada (G7 Summit location)
     topic: "War",
-    city: "Yangon",
-    image: "https://images.unsplash.com/photo-1451847251646-8a6c0dd1510c?w=1920&q=80",
+    city: "Calgary",
+    image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1920&q=80",
     articles: [
       {
-        bias: 0.55,
-        url: "https://www.reuters.com/world/asia-pacific/myanmar-military-territorial-losses-2025/",
-        title: "Myanmar junta loses ground as resistance gains momentum",
-        publication: "Reuters"
-      },
-      {
-        bias: 0.60,
-        url: "https://www.aljazeera.com/news/myanmar-civil-war-ethnic-armies-advance",
-        title: "Ethnic armed groups make major gains against Myanmar military",
-        publication: "Al Jazeera"
+        bias: 0.35,
+        url: "https://www.cbc.ca/news/politics/canada-ukraine-military-assistance-2025",
+        title: "Canada announces $2 billion in military aid to Ukraine",
+        publication: "CBC News"
       },
       {
         bias: 0.50,
-        url: "https://www.bbc.com/news/world-asia-myanmar-conflict-analysis-2025",
-        title: "Myanmar's civil war: A nation on the brink of collapse",
-        publication: "BBC News"
+        url: "https://www.ctvnews.ca/politics/ukraine-military-support-canada",
+        title: "Canada commits $500 million through NATO Ukraine package",
+        publication: "CTV News"
       },
       {
-        bias: 0.65,
-        url: "https://www.irrawaddy.com/news/burma/military-loses-control-strategic-areas",
-        title: "Junta's grip weakens as resistance controls border regions",
-        publication: "The Irrawaddy"
-      }
+        bias: 0.45,
+        url: "https://globalnews.ca/news/canada-ukraine-defence-support-2025/",
+        title: "Canadian military assistance to Ukraine reaches billions in 2025",
+        publication: "Global News"
+      },
     ]
   },
   {
-    title: "Yemen Conflict Sees Renewed Houthi Attacks on Red Sea Shipping",
-    summary:
-      "Yemen's Houthi rebels intensify attacks on commercial vessels in the Red Sea and Gulf of Aden, disrupting global shipping routes and escalating tensions with Saudi Arabia, UAE, and Western naval forces.",
-    whatToDo: [
-      "Major disruptions to global shipping and trade routes",
-      "Increased insurance costs for maritime transport",
-      "Ongoing humanitarian catastrophe in Yemen",
-      "Risk of broader regional conflict involving Iran and Western powers"
-    ],
-    significance: "High",
-    coordinates: [15.5527, 48.5164], // Sana'a, Yemen
+    title: "Canadian Army Restructuring Amid Troop and Equipment Demands",
+    summary: "In March 2025, military planners announced they are laying groundwork for a major restructuring of the Canadian Army to address demands for more troops and equipment both domestically and overseas, particularly for the expanded Latvia mission. The restructuring comes as the army faces a critical shortage of over 10,000 personnel, outdated equipment, and training gaps. The changes aim to improve operational readiness and capability, but face challenges from insufficient resources and the ongoing personnel crisis.",
+    whatToDo: [],
+    coordinates: [45.4180, -75.7010], // Ottawa, Canada (slightly staggered)
     topic: "War",
-    city: "Sana'a",
-    image: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=1920&q=80",
+    city: "Ottawa",
+    image: "https://images.unsplash.com/photo-1562577309-2592ab84b1bc?w=1920&q=80",
     articles: [
       {
-        bias: 0.50,
-        url: "https://www.reuters.com/world/middle-east/yemen-houthi-red-sea-attacks-2025/",
-        title: "Houthi attacks disrupt critical Red Sea shipping lanes",
-        publication: "Reuters"
-      },
-      {
-        bias: 0.55,
-        url: "https://www.bbc.com/news/world-middle-east-yemen-shipping-crisis",
-        title: "Yemen conflict threatens global maritime trade",
-        publication: "BBC News"
-      },
-      {
-        bias: 0.60,
-        url: "https://www.aljazeera.com/news/yemen-houthi-maritime-attacks-impact",
-        title: "Red Sea attacks: How Yemen's war affects global commerce",
-        publication: "Al Jazeera"
+        bias: 0.35,
+        url: "https://www.cbc.ca/news/politics/canada-army-restructuring-latvia-1.7476793",
+        title: "Military planners map out restructuring the Canadian Army",
+        publication: "CBC News"
       },
       {
         bias: 0.50,
-        url: "https://www.un.org/press/en/yemen-humanitarian-situation-2025",
-        title: "Yemen humanitarian crisis: 2025 assessment",
-        publication: "United Nations"
-      }
+        url: "https://www.ctvnews.ca/politics/canadian-army-restructuring-plans",
+        title: "Army faces major restructuring amid personnel and equipment shortages",
+        publication: "CTV News"
+      },
+      {
+        bias: 0.45,
+        url: "https://globalnews.ca/news/canada-military-restructuring-2025/",
+        title: "Canadian Armed Forces plan major army overhaul",
+        publication: "Global News"
+      },
     ]
   },
   {
-    title: "Ethiopia-Tigray Peace Deal Remains Fragile Amid Violations",
-    summary:
-      "Two years after the peace agreement, tensions remain high as allegations of ceasefire violations persist, humanitarian access remains limited, and reconstruction efforts lag behind urgent needs in war-torn Tigray.",
-    whatToDo: [
-      "Continued humanitarian crisis with limited aid access",
-      "Slow return of displaced persons due to security concerns",
-      "Ongoing ethnic tensions threatening fragile peace",
-      "Delayed reconstruction hampering economic recovery"
-    ],
-    significance: "Medium",
-    coordinates: [9.0320, 38.7469], // Addis Ababa, Ethiopia
+    title: "Improved Military Compensation to Address Retention Crisis",
+    summary: "In August 2025, the Canadian Armed Forces announced improvements to compensation and benefits targeting critical occupations essential to operational readiness. While the CAF met its overall recruiting goal in fiscal 2024-25, it continues to face critical shortages in specialized roles. The compensation improvements include enhanced pay, better benefits, and retention incentives aimed at bringing the right people into critical occupations. The changes acknowledge that poor compensation has been a major factor driving personnel away from military service.",
+    whatToDo: [],
+    coordinates: [45.4250, -75.6930], // Ottawa, Canada (slightly staggered)
     topic: "War",
-    city: "Addis Ababa",
-    image: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1920&q=80",
+    city: "Ottawa",
+    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1920&q=80",
     articles: [
       {
-        bias: 0.50,
-        url: "https://www.reuters.com/world/africa/ethiopia-tigray-peace-deal-challenges-2025/",
-        title: "Ethiopia's fragile peace faces implementation challenges",
-        publication: "Reuters"
-      },
-      {
-        bias: 0.55,
-        url: "https://www.bbc.com/news/world-africa-ethiopia-tigray-peace-violations",
-        title: "Tigray peace deal under strain as violations reported",
-        publication: "BBC News"
-      },
-      {
-        bias: 0.60,
-        url: "https://www.aljazeera.com/news/ethiopia-tigray-humanitarian-access-limited",
-        title: "Humanitarian crisis persists in Tigray despite peace agreement",
-        publication: "Al Jazeera"
-      },
-      {
-        bias: 0.65,
-        url: "https://www.hrw.org/news/ethiopia-tigray-ceasefire-violations-2025",
-        title: "Ethiopia: Persistent violations undermine Tigray peace",
-        publication: "Human Rights Watch"
-      }
-    ]
-  },
-  {
-    title: "Armenia-Azerbaijan Border Tensions Threaten New Escalation",
-    summary:
-      "Despite Azerbaijan's 2023 military victory in Nagorno-Karabakh, border disputes and rhetoric continue to raise fears of renewed conflict, with over 100,000 ethnic Armenians displaced and peace negotiations stalled.",
-    whatToDo: [
-      "Over 100,000 ethnic Armenians remain displaced from Nagorno-Karabakh",
-      "Continued border incidents risk triggering broader conflict",
-      "Regional energy and transportation projects remain threatened",
-      "Potential for Russian or Western involvement complicating situation"
-    ],
-    significance: "Medium",
-    coordinates: [40.1792, 44.4991], // Yerevan, Armenia
-    topic: "War",
-    city: "Yerevan",
-    image: "https://images.unsplash.com/photo-1509023464722-18d996393ca8?w=1920&q=80",
-    articles: [
-      {
-        bias: 0.50,
-        url: "https://www.reuters.com/world/asia-pacific/armenia-azerbaijan-border-tensions-2025/",
-        title: "Armenia-Azerbaijan tensions persist despite Karabakh resolution",
-        publication: "Reuters"
-      },
-      {
-        bias: 0.55,
-        url: "https://www.bbc.com/news/world-europe-armenia-azerbaijan-border-dispute",
-        title: "Border incidents threaten fragile South Caucasus peace",
-        publication: "BBC News"
-      },
-      {
-        bias: 0.60,
-        url: "https://www.aljazeera.com/news/caucasus-armenia-azerbaijan-conflict-risk",
-        title: "Can Armenia and Azerbaijan avoid another war?",
-        publication: "Al Jazeera"
+        bias: 0.35,
+        url: "https://www.cbc.ca/news/politics/military-compensation-improvements-2025",
+        title: "Military announces pay increases to address retention crisis",
+        publication: "CBC News"
       },
       {
         bias: 0.50,
-        url: "https://www.crisisgroup.org/europe-central-asia/caucasus/armenia-azerbaijan-2025",
-        title: "Armenia-Azerbaijan: Preventing renewed conflict",
-        publication: "International Crisis Group"
-      }
-    ]
-  },
-  {
-    title: "Democratic Republic of Congo Faces Renewed M23 Rebel Offensive",
-    summary:
-      "The M23 rebel group, allegedly backed by Rwanda, has captured significant territory in eastern DRC, displacing hundreds of thousands and threatening regional stability while natural resource exploitation continues.",
-    whatToDo: [
-      "Mass displacement of civilians in mineral-rich eastern regions",
-      "Increased tensions between DRC and Rwanda",
-      "Disruption of critical mineral supply chains (cobalt, coltan)",
-      "Humanitarian crisis compounded by multiple armed groups"
-    ],
-    significance: "Medium",
-    coordinates: [-4.0383, 21.7587], // Kinshasa, DRC
-    topic: "War",
-    city: "Kinshasa",
-    image: "https://images.unsplash.com/photo-1484318571209-661cf29a69c3?w=1920&q=80",
-    articles: [
-      {
-        bias: 0.50,
-        url: "https://www.reuters.com/world/africa/drc-m23-rebels-offensive-2025/",
-        title: "M23 rebels advance in eastern DRC despite peacekeepers",
-        publication: "Reuters"
+        url: "https://www.ctvnews.ca/canada/armed-forces-compensation-benefits",
+        title: "Canadian Armed Forces improve compensation for critical roles",
+        publication: "CTV News"
       },
       {
-        bias: 0.55,
-        url: "https://www.bbc.com/news/world-africa-drc-m23-conflict-escalation",
-        title: "DRC conflict: Thousands flee as M23 captures new territory",
-        publication: "BBC News"
+        bias: 0.45,
+        url: "https://globalnews.ca/news/canada-military-pay-retention/",
+        title: "Better pay and benefits aim to keep military personnel from leaving",
+        publication: "Global News"
       },
-      {
-        bias: 0.60,
-        url: "https://www.aljazeera.com/news/drc-rwanda-tensions-m23-backing-allegations",
-        title: "Rwanda denies backing M23 as DRC tensions escalate",
-        publication: "Al Jazeera"
-      },
-      {
-        bias: 0.65,
-        url: "https://www.hrw.org/news/drc-m23-abuses-mineral-exploitation-2025",
-        title: "DRC: M23 abuses continue amid resource extraction",
-        publication: "Human Rights Watch"
-      }
     ]
   }
-];
+]
