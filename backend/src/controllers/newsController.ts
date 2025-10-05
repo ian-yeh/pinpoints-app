@@ -18,11 +18,12 @@ export async function getLatestNews(req: Request, res: Response) {
 export async function getQueriedNews(req: Request, res: Response) {
   try {
     let { keyword, from, country } = req.query;
-    console.log(keyword);
+
     const value = encodeURIComponent(keyword as string) + '+' + encodeURIComponent(country as string)
     let url = `https://newsapi.org/v2/everything?q=${value}&from=${from}&domains=cbc.ca/news,foxnews.com,aljazeera.com,apnews.com,cbsnews.com,news.google.comß&apiKey=${process.env.NEWS_API_KEY}`;
     const response = await fetch(url);
     const data = await response.json();
+
     res.json(data);
   } catch (error) {
     console.error(error);
