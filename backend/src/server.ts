@@ -4,8 +4,7 @@ import dotenv from "dotenv";
 import { GoogleGenAI } from "@google/genai";
 import newsRouter from "./routes/newsRoutes";
 import geminiRouter from "./routes/geminiRoutes";
-//import { createNewIssue } from "./main";
-import { UserInfo } from "./datatype";
+import { createNewIssue } from "./main";
 
 dotenv.config();
 
@@ -15,10 +14,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-app.post("/api/createissue", (req, res) => {
-  const userInfo : UserInfo = req.body
-  //createNewIssue(userInfo);
-});
+app.post("/api/createissue", createNewIssue);
 
 app.use("/api/news", newsRouter);
 app.use("/api/gemini", geminiRouter);

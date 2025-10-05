@@ -2,7 +2,7 @@ import { Type } from "@google/genai";
 import { Request, Response } from "express";
 import { AI } from "../server"
 
-import { ArticleBias } from "../datatype"
+import { Bias } from "../datatype"
 
 import { parseArticle } from "../functions";
 
@@ -111,9 +111,9 @@ export async function URLReader(req: Request, res: Response) {
     });
     console.log(response.text)
     if(response.text !== undefined){
-      const article : ArticleBias | null = parseArticle(response.text);
+      const article : Bias | null = parseArticle(response.text);
 
-      res.json({ info:  article});
+      res.json({ article });
     }
     else{
       throw new Error("Cannot access site")
