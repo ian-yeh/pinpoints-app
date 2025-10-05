@@ -44,6 +44,7 @@ export type EvalArticle = {
     publication: string;
     topic: string;
     bias: Bias;
+    image: string;
 }
 
 export type GeneratedIssue = {
@@ -62,5 +63,6 @@ export type Issue = {
     Significance: string;
     coords: Pair;
     city: string;
+    image: string;
     Articles: EvalArticle[];
 }

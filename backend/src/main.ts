@@ -46,6 +46,7 @@ export async function createNewIssue(req: Request, res: Response) {
                     title: curArt.title,
                     publication: curArt.publishedAt,
                     topic: userInfo.topic,
+                    image: curArt.urlToImage,
                     bias: biasData
                 }                
                 biasArticles.push(art);
@@ -98,14 +99,16 @@ export async function createNewIssue(req: Request, res: Response) {
         if(!response.ok){
             throw new Error(`Issue Generating Issue: ${response.status}`);
         }
-        const data : GeneratedIssue = await response.json();
+        const data = await response.json();
+        const generatedData : GeneratedIssue = data.data 
         let Issue : Issue = {
-            Title: data.Title,
-            Summary: data.Summary,
-            Suggestion: data.Suggestion,
-            Significance: data.Siginificance,
-            coords: data.coords,
-            city: data.city,
+            Title: generatedData.Title,
+            Summary: generatedData.Summary,
+            Suggestion: generatedData.Suggestion,
+            Significance: generatedData.Siginificance,
+            coords: generatedData.coords,
+            city: generatedData.city,
+            image: bestArticle.image,
             Articles: biasArticles
         }
         res.json({Issue});
