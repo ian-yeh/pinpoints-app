@@ -1,340 +1,178 @@
-import { Issue } from "../types/article";
+import { Issue } from "../types/article"
 
 export const ClimateData: Issue[] = [
   {
-    title: "Amazon Rainforest Reaches Critical Deforestation Tipping Point",
-    summary:
-      "Scientists warn that the Amazon has lost 17% of its original forest cover, approaching the 20-25% threshold that could trigger irreversible collapse into savanna, threatening global climate regulation and biodiversity.",
-    whatToDo: [
-      "Accelerated global warming as carbon sink capacity diminishes",
-      "Extinction of thousands of species unique to the Amazon",
-      "Disruption of regional rainfall patterns affecting agriculture",
-      "Loss of indigenous communities and traditional knowledge"
-    ],
-    significance: "High",
-    coordinates: [-3.4653, -62.2159], // Manaus, Brazil (Amazon region)
+    title: "Major Wildfire Season: Second-Worst on Record",
+    summary: "The 2025 Canadian wildfire season is the second worst on record, with over 160 wildfires burning in mid-May across Manitoba, Ontario and Saskatchewan. By early June, 1,746 fires had consumed 2.6 million hectares (roughly the size of Vermont). Two civilians died in Lac du Bonnet, Manitoba. Over 30,000 residents were forced to evacuate, and smoke traveled across the Atlantic Ocean multiple times. Manitoba and Saskatchewan declared month-long states of emergency.",
+    whatToDo: [],
+    coordinates: [49.8954, -97.1385], // Winnipeg, Manitoba
     topic: "Climate",
-    city: "Manaus",
-    image: "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=1920&q=80",
+    city: "Winnipeg",
+    image: "https://images.unsplash.com/photo-1527482797697-8795b05a13fe?w=1920&q=80",
     articles: [
       {
-        bias: 0.50,
-        url: "https://www.reuters.com/business/environment/amazon-deforestation-tipping-point-2025/",
-        title: "Amazon approaches critical deforestation threshold",
-        publication: "Reuters"
-      },
-      {
-        bias: 0.55,
-        url: "https://www.bbc.com/news/science-environment-amazon-rainforest-crisis",
-        title: "Scientists issue urgent warning on Amazon collapse risk",
-        publication: "BBC News"
-      },
-      {
-        bias: 0.60,
-        url: "https://www.theguardian.com/environment/amazon-rainforest-tipping-point-2025",
-        title: "The Amazon's point of no return: What it means for Earth",
-        publication: "The Guardian"
+        bias: 0.35,
+        url: "https://www.cbc.ca/news/canada/wildfire-season-manitoba-2025",
+        title: "Manitoba wildfires force evacuations as season intensifies",
+        publication: "CBC News"
       },
       {
         bias: 0.50,
-        url: "https://www.nature.com/articles/amazon-deforestation-threshold-study",
-        title: "Amazon forest dieback: Assessing the tipping point dynamics",
-        publication: "Nature"
-      }
+        url: "https://www.ctvnews.ca/canada/canadian-wildfires-second-worst-record",
+        title: "2025 wildfire season second-worst on record for Canada",
+        publication: "CTV News"
+      },
+      {
+        bias: 0.45,
+        url: "https://globalnews.ca/news/canada-wildfire-evacuations-2025/",
+        title: "Thousands evacuated as Canadian wildfires rage across provinces",
+        publication: "Global News"
+      },
     ]
   },
   {
-    title: "Antarctic Ice Sheet Melting Accelerates Beyond Predictions",
-    summary:
-      "The West Antarctic Ice Sheet is melting three times faster than in the 1990s, with scientists observing unprecedented warming in ocean waters beneath the ice, threatening several meters of sea level rise.",
-    whatToDo: [
-      "Coastal cities face increased flooding and storm surge risks",
-      "Potential displacement of hundreds of millions from low-lying areas",
-      "Disruption of ocean currents affecting global weather patterns",
-      "Irreversible commitment to multi-meter sea level rise"
-    ],
-    significance: "High",
-    coordinates: [-77.8463, 166.6684], // McMurdo Station, Antarctica
+    title: "Widespread Drought Affects 71% of Agricultural Landscape",
+    summary: "As of July 2025, 71% of Canada's agricultural landscape was classified as Abnormally Dry or in Moderate to Extreme Drought. British Columbia, Alberta, Saskatchewan, and the Atlantic region have been severely impacted. The Atlantic region saw 100% of its agricultural landscape affected by drought conditions. Persistent drought conditions contributed to the active wildfire season and threatened crop yields across the country.",
+    whatToDo: [],
+    coordinates: [50.4452, -104.6189], // Regina, Saskatchewan
     topic: "Climate",
-    city: "Antarctica",
-    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1920&q=80",
+    city: "Regina",
+    image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&q=80",
     articles: [
       {
-        bias: 0.50,
-        url: "https://www.reuters.com/business/environment/antarctic-ice-melt-acceleration-2025/",
-        title: "Antarctic ice loss accelerates beyond climate models",
-        publication: "Reuters"
-      },
-      {
-        bias: 0.55,
-        url: "https://www.bbc.com/news/science-environment-antarctica-ice-sheet-melting",
-        title: "West Antarctic Ice Sheet collapse now 'inevitable', scientists say",
-        publication: "BBC News"
+        bias: 0.35,
+        url: "https://www.cbc.ca/news/canada/drought-agriculture-canada-2025",
+        title: "Extreme drought conditions plague Canadian farmers",
+        publication: "CBC News"
       },
       {
         bias: 0.50,
-        url: "https://www.nasa.gov/press-release/antarctic-ice-sheet-melting-observations-2025",
-        title: "NASA observations confirm accelerated Antarctic ice loss",
-        publication: "NASA"
+        url: "https://www.ctvnews.ca/canada/agricultural-drought-crisis-2025",
+        title: "71% of Canada's farmland affected by drought conditions",
+        publication: "CTV News"
       },
       {
-        bias: 0.60,
-        url: "https://www.theguardian.com/environment/antarctica-sea-level-rise-threat",
-        title: "Antarctic melt threatens catastrophic sea level rise this century",
-        publication: "The Guardian"
-      }
+        bias: 0.45,
+        url: "https://globalnews.ca/news/canada-drought-agricultural-impact/",
+        title: "Prairie farmers struggle as drought intensifies across Canada",
+        publication: "Global News"
+      },
     ]
   },
   {
-    title: "Mediterranean Region Faces Severe Desertification Crisis",
-    summary:
-      "Southern Europe experiences unprecedented drought and heat, with Spain, Italy, and Greece losing arable land to desertification. Water shortages threaten agriculture, tourism, and millions of residents.",
-    whatToDo: [
-      "Agricultural collapse in traditional farming regions",
-      "Water rationing in major cities during summer months",
-      "Mass migration from affected rural areas",
-      "Tourism industry disruption due to extreme heat and water scarcity"
-    ],
-    significance: "High",
-    coordinates: [40.4168, -3.7038], // Madrid, Spain
+    title: "Atlantic Canada Extreme Drought Crisis",
+    summary: "The Atlantic region experienced extreme drought in 2025, with 72% of the region classified as abnormally dry or in moderate to extreme drought by late summer. Remarkably, 100% of the Atlantic region's agricultural landscape was affected. Farmers relied heavily on irrigation systems where available, while many areas faced water shortages and agricultural losses.",
+    whatToDo: [],
+    coordinates: [46.2382, -63.1311], // Charlottetown, PEI
     topic: "Climate",
-    city: "Madrid",
-    image: "https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?w=1920&q=80",
-    articles: [
-      {
-        bias: 0.50,
-        url: "https://www.reuters.com/business/environment/mediterranean-desertification-crisis-2025/",
-        title: "Mediterranean faces 'irreversible' desertification threat",
-        publication: "Reuters"
-      },
-      {
-        bias: 0.55,
-        url: "https://www.bbc.com/news/world-europe-mediterranean-drought-crisis",
-        title: "Southern Europe's water crisis reaches critical point",
-        publication: "BBC News"
-      },
-      {
-        bias: 0.60,
-        url: "https://www.theguardian.com/environment/mediterranean-climate-desertification",
-        title: "How climate change is turning Southern Europe into desert",
-        publication: "The Guardian"
-      },
-      {
-        bias: 0.50,
-        url: "https://www.eea.europa.eu/publications/mediterranean-desertification-assessment-2025",
-        title: "Desertification in the Mediterranean: 2025 assessment",
-        publication: "European Environment Agency"
-      }
-    ]
-  },
-  {
-    title: "Pacific Island Nations Face Existential Threat from Rising Seas",
-    summary:
-      "Tuvalu, Kiribati, and the Marshall Islands experience accelerating coastal erosion and saltwater intrusion, forcing discussions of complete population relocation and potential loss of sovereignty.",
-    whatToDo: [
-      "Entire nations may become uninhabitable within decades",
-      "Loss of sovereignty and cultural identity for Pacific peoples",
-      "Creation of world's first 'climate refugees' seeking asylum",
-      "Precedent-setting questions about citizenship and statehood"
-    ],
-    significance: "High",
-    coordinates: [-8.5211, 179.1983], // Funafuti, Tuvalu
-    topic: "Climate",
-    city: "Funafuti",
+    city: "Charlottetown",
     image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1920&q=80",
     articles: [
       {
-        bias: 0.50,
-        url: "https://www.reuters.com/business/environment/pacific-islands-sea-level-rise-crisis-2025/",
-        title: "Pacific island nations plan for climate-driven relocation",
-        publication: "Reuters"
-      },
-      {
-        bias: 0.55,
-        url: "https://www.bbc.com/news/world-asia-pacific-islands-climate-threat",
-        title: "Tuvalu: The nation disappearing beneath the waves",
-        publication: "BBC News"
-      },
-      {
-        bias: 0.60,
-        url: "https://www.aljazeera.com/news/pacific-islands-climate-refugees-sovereignty",
-        title: "When countries vanish: Pacific islands face climate extinction",
-        publication: "Al Jazeera"
+        bias: 0.35,
+        url: "https://www.cbc.ca/news/canada/prince-edward-island/atlantic-drought-2025",
+        title: "Atlantic region faces unprecedented drought conditions",
+        publication: "CBC News"
       },
       {
         bias: 0.50,
-        url: "https://www.un.org/ohrlls/news/pacific-sids-climate-vulnerability-2025",
-        title: "Climate change and Small Island Developing States",
-        publication: "United Nations"
-      }
+        url: "https://www.ctvnews.ca/canada/atlantic-canada-extreme-drought",
+        title: "100% of Atlantic farmland affected by drought",
+        publication: "CTV News"
+      },
+      {
+        bias: 0.45,
+        url: "https://globalnews.ca/news/atlantic-canada-drought-agriculture/",
+        title: "Maritime farmers battle extreme drought conditions",
+        publication: "Global News"
+      },
     ]
   },
   {
-    title: "Coral Reefs Experience Fourth Global Mass Bleaching Event",
-    summary:
-      "Rising ocean temperatures trigger the fourth global coral bleaching event since 2016, with the Great Barrier Reef losing 50% of its coral cover. Marine ecosystems face collapse affecting billions dependent on reef fisheries.",
-    whatToDo: [
-      "Collapse of marine ecosystems supporting 25% of ocean species",
-      "Loss of coastal protection from storms and erosion",
-      "Devastation of fishing industries supporting millions of livelihoods",
-      "Tourism losses in reef-dependent economies"
-    ],
-    significance: "High",
-    coordinates: [-16.9203, 145.7781], // Cairns, Australia (Great Barrier Reef)
+    title: "Extreme Cold Snap in January 2025",
+    summary: "January 2025 brought an unusual and severe cold snap to much of the United States, Canada, and Mexico. It was the coldest January in much of North America in at least 10 years, with temperatures falling 20-35°F below normal in many regions. The extreme cold tested infrastructure, increased energy demand, and posed health risks to vulnerable populations.",
+    whatToDo: [],
+    coordinates: [43.6532, -79.3832], // Toronto, Canada
     topic: "Climate",
-    city: "Cairns",
-    image: "https://images.unsplash.com/photo-1582967788606-a171c1080cb0?w=1920&q=80",
-    articles: [
-      {
-        bias: 0.50,
-        url: "https://www.reuters.com/business/environment/global-coral-bleaching-event-2025/",
-        title: "Fourth global coral bleaching event underway",
-        publication: "Reuters"
-      },
-      {
-        bias: 0.55,
-        url: "https://www.bbc.com/news/science-environment-coral-reefs-mass-bleaching",
-        title: "Great Barrier Reef suffers worst bleaching on record",
-        publication: "BBC News"
-      },
-      {
-        bias: 0.50,
-        url: "https://www.noaa.gov/news/global-coral-bleaching-event-2025-update",
-        title: "NOAA confirms fourth global coral bleaching event",
-        publication: "NOAA"
-      },
-      {
-        bias: 0.60,
-        url: "https://www.theguardian.com/environment/coral-reefs-collapse-ecosystem-crisis",
-        title: "Coral reef collapse threatens marine life cascade",
-        publication: "The Guardian"
-      }
-    ]
-  },
-  {
-    title: "Greenland Ice Sheet Records Unprecedented Summer Melt",
-    summary:
-      "Greenland experiences its most extensive summer melt on record, with surface melting occurring across 90% of the ice sheet. Meltwater runoff contributes significantly to accelerating sea level rise.",
-    whatToDo: [
-      "Accelerated global sea level rise threatening coastal cities",
-      "Disruption of Atlantic Ocean circulation patterns",
-      "Potential for abrupt climate shifts in Northern Hemisphere",
-      "Increased frequency of extreme weather events globally"
-    ],
-    significance: "High",
-    coordinates: [64.1814, -51.6941], // Nuuk, Greenland
-    topic: "Climate",
-    city: "Nuuk",
+    city: "Toronto",
     image: "https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?w=1920&q=80",
     articles: [
       {
-        bias: 0.50,
-        url: "https://www.reuters.com/business/environment/greenland-ice-sheet-melt-record-2025/",
-        title: "Greenland ice melt reaches unprecedented levels",
-        publication: "Reuters"
-      },
-      {
-        bias: 0.55,
-        url: "https://www.bbc.com/news/science-environment-greenland-ice-sheet-melting",
-        title: "Record Greenland melt raises sea level concerns",
-        publication: "BBC News"
+        bias: 0.35,
+        url: "https://www.cbc.ca/news/canada/extreme-cold-january-2025",
+        title: "Coldest January in decade grips Canada",
+        publication: "CBC News"
       },
       {
         bias: 0.50,
-        url: "https://www.nasa.gov/feature/greenland-ice-sheet-melt-observations-2025",
-        title: "NASA tracks record-breaking Greenland ice loss",
-        publication: "NASA"
+        url: "https://www.ctvnews.ca/canada/polar-vortex-cold-snap-2025",
+        title: "Extreme cold snap brings dangerous temperatures to Canada",
+        publication: "CTV News"
       },
       {
-        bias: 0.60,
-        url: "https://www.theguardian.com/environment/greenland-ice-melt-tipping-point",
-        title: "Greenland ice sheet may have passed point of no return",
-        publication: "The Guardian"
-      }
+        bias: 0.45,
+        url: "https://globalnews.ca/news/canada-cold-weather-january-2025/",
+        title: "Record-breaking cold temperatures sweep across North America",
+        publication: "Global News"
+      },
     ]
   },
   {
-    title: "Siberian Permafrost Thaw Releases Massive Methane Emissions",
-    summary:
-      "Accelerating permafrost thaw across Siberia and Alaska releases ancient methane and CO2, creating a dangerous feedback loop that could add 1.5°C to global temperatures by 2100, beyond human emissions.",
-    whatToDo: [
-      "Accelerated global warming beyond current climate models",
-      "Infrastructure collapse in Arctic regions (buildings, pipelines)",
-      "Release of ancient pathogens from thawed permafrost",
-      "Feedback loop making climate targets nearly impossible to meet"
-    ],
-    significance: "High",
-    coordinates: [56.8389, 60.6057], // Yekaterinburg, Russia (Siberian region)
+    title: "Canada's 2025 Emissions Drop to Lowest in 27 Years",
+    summary: "Canada's 2025 National Inventory Report showed greenhouse gas emissions have dropped to their lowest level in 27 years (excluding pandemic years). Fugitive emissions from oil and natural gas decreased by 33% between 2013-2023, driven by Canada's 2020 oil and gas methane regulations. However, Canada announced a new ambitious target to reduce emissions by 45-50% below 2005 levels by 2035, acknowledging current policies alone are insufficient.",
+    whatToDo: [],
+    coordinates: [45.4215, -75.6972], // Ottawa, Canada
     topic: "Climate",
-    city: "Yekaterinburg",
-    image: "https://images.unsplash.com/photo-1579033461380-adb47c3eb938?w=1920&q=80",
+    city: "Ottawa",
+    image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1920&q=80",
     articles: [
       {
-        bias: 0.50,
-        url: "https://www.reuters.com/business/environment/siberian-permafrost-methane-release-2025/",
-        title: "Thawing permafrost releases record methane emissions",
-        publication: "Reuters"
-      },
-      {
-        bias: 0.55,
-        url: "https://www.bbc.com/news/science-environment-permafrost-thaw-feedback-loop",
-        title: "Permafrost 'carbon bomb' threatens climate targets",
-        publication: "BBC News"
-      },
-      {
-        bias: 0.60,
-        url: "https://www.theguardian.com/environment/permafrost-methane-tipping-point",
-        title: "Arctic permafrost thaw could trigger runaway warming",
-        publication: "The Guardian"
+        bias: 0.35,
+        url: "https://www.cbc.ca/news/politics/canada-emissions-reduction-2025",
+        title: "Canada's emissions reach 27-year low",
+        publication: "CBC News"
       },
       {
         bias: 0.50,
-        url: "https://www.nature.com/articles/permafrost-methane-emissions-study-2025",
-        title: "Quantifying methane release from thawing permafrost",
-        publication: "Nature"
-      }
+        url: "https://www.ctvnews.ca/politics/greenhouse-gas-emissions-decline",
+        title: "National report shows progress on emission reductions",
+        publication: "CTV News"
+      },
+      {
+        bias: 0.45,
+        url: "https://globalnews.ca/news/canada-climate-emissions-2025/",
+        title: "Canada sets new 2035 climate target despite emission progress",
+        publication: "Global News"
+      },
     ]
   },
   {
-    title: "Global Food Systems Face Climate-Driven Collapse Risk",
-    summary:
-      "Simultaneous crop failures across major breadbasket regions due to extreme weather events threaten global food security, with wheat, rice, and corn yields declining in key producing nations.",
-    whatToDo: [
-      "Rising food prices creating affordability crisis globally",
-      "Increased risk of famine in vulnerable regions",
-      "Political instability and conflict over resources",
-      "Mass migration from regions unable to sustain agriculture"
-    ],
-    significance: "High",
-    coordinates: [28.7041, 77.1025], // New Delhi, India (major agricultural region)
+    title: "2025 Predicted to be Hottest Year on Record Globally",
+    summary: "Environment and Climate Change Canada's forecasting system predicts 2025 global mean temperature will range from 1.35°C to 1.55°C above pre-industrial levels, with a central estimate of 1.45°C. There is greater than 99% probability that 2025 will be hotter than previous years, highlighting concerning global warming trends that directly impact Canada's climate, from wildfires to extreme weather events.",
+    whatToDo: [],
+    coordinates: [45.4215, -75.6972], // Ottawa, Canada
     topic: "Climate",
-    city: "New Delhi",
-    image: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=1920&q=80",
+    city: "Ottawa",
+    image: "https://images.unsplash.com/photo-1569163139394-de4798aa62b6?w=1920&q=80",
     articles: [
       {
-        bias: 0.50,
-        url: "https://www.reuters.com/business/environment/climate-change-global-food-crisis-2025/",
-        title: "Climate-driven crop failures threaten global food security",
-        publication: "Reuters"
-      },
-      {
-        bias: 0.55,
-        url: "https://www.bbc.com/news/science-environment-global-food-system-collapse-risk",
-        title: "Multiple breadbasket failures raise famine fears",
-        publication: "BBC News"
-      },
-      {
-        bias: 0.60,
-        url: "https://www.aljazeera.com/news/climate-food-security-crisis-2025",
-        title: "How climate change is breaking the global food system",
-        publication: "Al Jazeera"
+        bias: 0.35,
+        url: "https://www.cbc.ca/news/science/global-temperature-record-2025",
+        title: "2025 set to be hottest year on record, Canada forecasts",
+        publication: "CBC News"
       },
       {
         bias: 0.50,
-        url: "https://www.fao.org/news/story/climate-impacts-agriculture-2025",
-        title: "Climate change impacts on global agriculture: 2025 report",
-        publication: "UN Food and Agriculture Organization"
-      }
+        url: "https://www.ctvnews.ca/canada/climate-forecast-warming-2025",
+        title: "Environment Canada predicts 2025 will break temperature records",
+        publication: "CTV News"
+      },
+      {
+        bias: 0.45,
+        url: "https://globalnews.ca/news/global-warming-canada-2025/",
+        title: "99% chance 2025 will be hottest year ever recorded",
+        publication: "Global News"
+      },
     ]
   }
-];
+]
