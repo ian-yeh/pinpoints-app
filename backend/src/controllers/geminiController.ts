@@ -25,11 +25,11 @@ export async function createIssue(req: Request, res: Response) {
         responseSchema: {
           type: Type.OBJECT,
           properties: {
-            Title: {
+            title: {
               type: Type.STRING,
               description: `Create an unbiased title representing the content. This title will be used for the issue.`
             },
-            Summary: {
+            summary: {
               type: Type.ARRAY,
               description: `Summarize the content so that it is readable. Do not change the content itself. You are allowed to paraphrase.
               Each string gets one point. This is a concise summary, focusing on the main point.`,
@@ -37,27 +37,22 @@ export async function createIssue(req: Request, res: Response) {
                 type: Type.STRING
               }
             },
-            Significance: {
+            significance: {
               type: Type.STRING,
               description: `Describe why this event is significant to the user based on the user's situation ${user}.
               Be concise. Explain how it might affect them.`
             },
-            Suggestion: {
+            whatToDo: {
               type: Type.STRING,
               description: `Describe what the user should do ${user}. If it does not affect the user tell them ONLY
               "It does not affect you." Do not give insight on what you think.`
             },
-            coords: {
-              type: Type.OBJECT,
+            coordinates: {
+              type: Type.ARRAY,
               description: `Based on the content and ${publication} estimate the location at which this article applies to.
-              Longitude is represented by y, Latitude is represented by x`,
-              properties: {
-                x: {
-                  type: Type.NUMBER,
-                },
-                y: {
-                  type: Type.NUMBER
-                }
+              Longitude is represented by y, Latitude is represented by x, return an array of [x, y], where x and y are numbers, and nothing else.`,
+              items: {
+                type: Type.NUMBER
               }
             },
             city: {

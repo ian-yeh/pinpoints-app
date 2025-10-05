@@ -42,27 +42,33 @@ export type EvalArticle = {
     url: string;
     title: string;
     publication: string;
-    topic: string;
     bias: Bias;
     image: string;
 }
 
+export type IssueArticle = {
+  url: string;
+  title: string;
+  publication: string;
+  bias: number;
+}
+
 export type GeneratedIssue = {
-    Title: string;
-    Summary: string;
-    Suggestion: string;
-    Siginificance: string;
-    coords: Pair;
+    title: string;
+    summary: string;
+    whatToDo: string;
+    significance: string;
+    coordinates: [number, number];
     city: string;
 }
 
 export type Issue = {
-    Title: string;
-    Summary: string;
-    Suggestion: string;
-    Significance: string;
-    coords: Pair;
+    title: string;
+    summary: string;
+    whatToDo: string;
+    significance: string;
+    coordinates: [number, number];
     city: string;
     image: string;
-    Articles: EvalArticle[];
+    articles: IssueArticle[];
 }

@@ -7,15 +7,17 @@ export async function POST(request: NextRequest) {
 
   try {
     body = await request.json();
+    console.log(body)
 
     // Make the request to your backend
-    const response = await fetch('http://localhost:3000/api/createissue', {
+    const response = await fetch('http://localhost:8080/api/createissue', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
     });
+    console.log("THIS RUNS")
 
     const data = await response.json();
     console.log('Response from backend:', data);

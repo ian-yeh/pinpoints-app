@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 
-import { UserInfo, Article, NewsResponse, Bias, EvalArticle, Issue, GeneratedIssue } from "./datatype";
+import { UserInfo, Article, NewsResponse, Bias, EvalArticle, Issue, GeneratedIssue, IssueArticle } from "./datatype";
 
-const host : string = "http://localhost:3000/api"
+const host : string = "http://localhost:8080/api"
 
 export async function createNewIssue(req: Request, res: Response) {
     const { age, race, country, topic, schoolStatus } = req.body;
@@ -30,6 +30,7 @@ export async function createNewIssue(req: Request, res: Response) {
         // cannot continue without articles
     }
     let biasArticles : EvalArticle[] = new Array;
+    let issueArticles: IssueArticle[] = new Array;
     for(let i=0; i<articles.length; i++){
         let curArt : Article = articles[i]
         try{
@@ -40,17 +41,25 @@ export async function createNewIssue(req: Request, res: Response) {
             }
             let data = await response.json()
             let biasData : Bias = data.bias;
+
             if(biasData !== null && biasData !== undefined && biasData.biasValue !== undefined){
                 let art : EvalArticle = {
                     url: curArt.url,
                     title: curArt.title,
                     publication: curArt.publishedAt,
-                    topic: userInfo.topic,
-                    image: curArt.urlToImage,
-                    bias: biasData
+                    bias: biasData,
+                    image: curArt.urlToImage
                 }                
+                let issueArticle: IssueArticle = {
+                    url: curArt.url,
+                    title: curArt.title,
+                    publication: curArt.publishedAt,
+                    bias: biasData.biasValue,
+                }
                 biasArticles.push(art);
+                issueArticles.push(issueArticle);
             }
+
             else {
                 console.log(`Article: ${i} had a generation error`);
                 throw new Error(`Article: ${i} had a generation error`);
@@ -101,15 +110,15 @@ export async function createNewIssue(req: Request, res: Response) {
         }
         const data = await response.json();
         const generatedData : GeneratedIssue = data.data 
-        let Issue : Issue = {
-            Title: generatedData.Title,
-            Summary: generatedData.Summary,
-            Suggestion: generatedData.Suggestion,
-            Significance: generatedData.Siginificance,
-            coords: generatedData.coords,
+        let Issue: Issue = {
+            title: generatedData.title,
+            summary: generatedData.summary,
+            whatToDo: generatedData.whatToDo,
+            significance: generatedData.significance,
+            coordinates: generatedData.coordinates,
             city: generatedData.city,
             image: bestArticle.image,
-            Articles: biasArticles
+            articles: issueArticles
         }
         res.json({Issue});
     }
