@@ -18,6 +18,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <div className="absolute inset-0 bg-[url('/bg.jpg')] bg-cover bg-center bg-no-repeat opacity-20 -z-10" />
       {/* HEADER - Fixed height */}
       <div className='h-[20vh] flex flex-col items-center justify-center'>
         <Header />
@@ -33,13 +34,13 @@ export default function Home() {
                 animate={{ opacity: 100, y: 0}}
                 transition={{ duration: 0.5 }}
               >
-                <h1 className='font-extrabold text-[64px] tracking-tight leading-relaxed'>
-                  Knowing your world better <span className="bg-gradient-to-r from-foreground/100 to-foreground/40 bg-clip-text text-transparent">
-                    does not need to be difficult.
-                  </span>
-                </h1>
-                <h3 className='mt-8 text-2xl font-light tracking-wide'>
-                  We make information easy, across the <span className='font-extrabold'>whole</span> spectrum.
+              <h1 className='font-extrabold text-[64px] tracking-tight leading-relaxed'>
+                Your world is changing. <span className="bg-gradient-to-r from-foreground to-gray-400 bg-clip-text text-transparent">
+                  Stay ahead of it.
+                </span>
+              </h1>
+              <h3 className='mt-8 text-xl font-light tracking-wide'>
+                Real-time issues mapped to your location. AI-powered insights. Complete perspectives. Finally, news that makes sense.
                 </h3>
               </motion.div>
               <motion.div 
