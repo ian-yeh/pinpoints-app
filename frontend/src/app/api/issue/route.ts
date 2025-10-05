@@ -1,13 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { UserInfo } from '@/lib/types/user';
-import { getMockDataFromTopic } from '@/lib/data/fallback';
 
 export async function POST(request: NextRequest) {
-  let body: UserInfo | null = null;
-
   try {
-    body = await request.json();
-    console.log(body)
+    const body = await request.json();
+    const { content, user, issueTitle } = body;
+    
+    console.log('Generating guidance for:', issueTitle);
 
     // Make the request to your backend
     const response = await fetch('http://localhost:8080/api/createissue', {
@@ -15,26 +13,36 @@ export async function POST(request: NextRequest) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify({
+        content,
+        user,
+        issueTitle
+      }),
     });
-    console.log("THIS RUNS")
-
-    const data = await response.json();
-    console.log('Response from backend:', data);
 
     if (!response.ok) {
+      const errorData = await response.json();
+      console.error('Backend error:', errorData);
       return NextResponse.json(
-        { error: 'Failed to create issue', details: data },
+        { error: 'Failed to generate guidance', details: errorData },
         { status: response.status }
       );
     }
 
-    return NextResponse.json(data, { status: 200 });
-  } catch (error) {
-    console.error('Error creating issue:', error);
-    console.log('Falling back to mock data');
+    const data = await response.json();
+    console.log('Response from backend:', data);
 
-    const topicMockData = getMockDataFromTopic(body?.topic ?? 'default');
-    return NextResponse.json(topicMockData, { status: 200 });
+    // Ensure we're returning the whatToDo array
+    return NextResponse.json({ 
+      whatToDo: data.data?.whatToDo || data.whatToDo || [] 
+    }, { status: 200 });
+
+  } catch (error) {
+    console.error('Error generating guidance:', error);
+    
+    // Fallback response
+    return NextResponse.json({ 
+      whatToDo: ['Unable to generate personalized guidance at this time. Please try again later.'] 
+    }, { status: 200 });
   }
 }
