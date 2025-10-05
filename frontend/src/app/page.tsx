@@ -40,8 +40,8 @@ export default function Home() {
                 </span>
               </h1>
               <h3 className='mt-8 text-xl font-light tracking-wide'>
-                Real-time issues mapped to your location. AI-powered insights. Complete perspectives. Finally, news that makes sense.
-                </h3>
+                Every issue. Every perspective. Zero bias. Just the truth you need to make informed decisions.
+              </h3>
               </motion.div>
               <motion.div 
               initial={{ width: 0 }}
