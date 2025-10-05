@@ -7,4 +7,6 @@ geminiRouter.post("/issue", gemini.createIssue);
 
 geminiRouter.get("/article", gemini.URLReader);
 
+geminiRouter.get("/readsite", gemini.grabcontent);
+
 export default geminiRouter;

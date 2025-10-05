@@ -42,7 +42,7 @@ export type EvalArticle = {
     url: string;
     title: string;
     publication: string;
-    bias: Bias;
+    bias: number;
     image: string;
 }
 

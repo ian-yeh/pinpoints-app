@@ -40,9 +40,9 @@ export async function createNewIssue(req: Request, res: Response) {
                 throw new Error(`Issue Reading Articles: ${response.status}`)
             }
             let data = await response.json()
-            let biasData : Bias = data.bias;
+            let biasData : number = data.bias;
 
-            if(biasData !== null && biasData !== undefined && biasData.biasValue !== undefined){
+            if(biasData !== null){
                 let art : EvalArticle = {
                     url: curArt.url,
                     title: curArt.title,
@@ -54,7 +54,7 @@ export async function createNewIssue(req: Request, res: Response) {
                     url: curArt.url,
                     title: curArt.title,
                     publication: curArt.publishedAt,
-                    bias: biasData.biasValue,
+                    bias: biasData,
                 }
                 biasArticles.push(art);
                 issueArticles.push(issueArticle);
@@ -78,7 +78,7 @@ export async function createNewIssue(req: Request, res: Response) {
     // find closest neutral score 0.5 = neutrals
     let maxi : number = 0;
     for(let i=0; i<biasArticles.length; i++){
-        if(Math.abs((biasArticles[i].bias.biasValue) - 0.5) < Math.abs((biasArticles[maxi].bias.biasValue) - 0.5)){
+        if(Math.abs((biasArticles[i].bias) - 0.5) < Math.abs((biasArticles[maxi].bias) - 0.5)){
             maxi = i;
         }
     }
@@ -90,15 +90,31 @@ export async function createNewIssue(req: Request, res: Response) {
     }
 
     const bestArticle : EvalArticle = biasArticles[maxi];
-    const articleContext : string = `${host}/gemini/issue`;
+    console.log(bestArticle.url)
+    let artContent : string;
+
+    try{
+        const response = await fetch(`${host}/gemini/readsite?url=${bestArticle.url}`);
+        if(!response.ok){
+            throw new Error(`Issue Searching Articles: ${response.status}`);
+        }
+        const data : string = await response.json();
+        artContent = data
+    }
+    catch(Error){
+        console.log(Error);
+        return res.status(500).json({ message: "Error grabbing info from article" }) 
+    }    
+
+    const issueGeneration : string = `${host}/gemini/issue`;
     const bodydata = {
-        content: bestArticle.bias.content,
+        content: artContent,
         user: userString,
         pub: bestArticle.publication
     }
 
     try {
-        const response = await fetch(articleContext, {
+        const response = await fetch(issueGeneration, {
             method: "POST",
             headers: {
             "Content-Type": "application/json"
