@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useUser } from '@/lib/hooks/useUser';
 import { countryOptions } from '@/lib/data/countries';
+import Logo from './Logo';
 
 const Sidebar = () => {
   const { userInfo, setUserInfo } = useUser()
@@ -15,6 +16,7 @@ const Sidebar = () => {
     { icon: Home, label: 'Home', href: '/' },
   ];
 
+  const searchCategories = ['Education', 'War', 'Policy', 'Climate'];
   const ageOptions = ['18-24', '25-34', '35-44', '45-54', '55-64', '65+'];
   const raceOptions = ['White', 'Black', 'East Asian', 'First Nations', 'Pacific Islander', 'Multiracial', 'Other', 'Prefer not to say'];
   const schoolStatusOptions = ['High School', 'Undergraduate', 'Graduate', 'PhD', 'Not a Student', 'Prefer not to say'];
@@ -24,6 +26,7 @@ const Sidebar = () => {
       ...userInfo,
       [field]: value
     });
+    console.log(userInfo)
   };
 
   useEffect(() => {
@@ -45,7 +48,7 @@ const Sidebar = () => {
         <div className="flex flex-col h-full">
           {/* Logo/Header */}
           <div className="p-6 border-b border-gray-800">
-            <h1 className="text-2xl font-bold">YourApp</h1>
+            <Logo />
           </div>
           
           {/* Navigation */}
@@ -89,6 +92,21 @@ const Sidebar = () => {
                       ease: [0.76, 0, 0.24, 1] 
                     }}
                   >
+                    {/* Search Category Dropdown */}
+                    <div className="space-y-1">
+                      <label className="text-sm font-bold text-white block px-2">I want to learn about...</label>
+                      <select 
+                        value={userInfo.topic}
+                        onChange={(e) => handleChange('topic', e.target.value)}
+                        className="w-full p-2 bg-bg border border-bg-light rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-gray-700/50 focus:border-transparent transition-colors"
+                      >
+                        <option value="">Select category</option>
+                        {searchCategories.map(category => (
+                          <option key={category} value={category}>{category}</option>
+                        ))}
+                      </select>
+                    </div>
+
                     {/* Age Dropdown */}
                     <div className="space-y-1">
                       <label className="text-sm font-bold text-white block px-2">Age</label>

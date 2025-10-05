@@ -10,7 +10,6 @@ import { parseArticle } from "../functions";
 export async function createIssue(req: Request, res: Response) {
 
   const content : string = req.body.content;
-  console.log(content)
   const user : string = req.body.user;
   const publication : string = req.body.pub;
 

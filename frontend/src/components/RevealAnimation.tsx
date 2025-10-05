@@ -13,7 +13,7 @@ interface RevealAnimationProps {
 export const RevealAnimation = ({ 
   children, 
   delay = 0, 
-  duration = 1.4,
+  duration = 0.4,
   className = ""
 }: RevealAnimationProps) => {
   return (

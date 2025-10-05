@@ -2,7 +2,9 @@ export type Issue = {
   title: string;
   summary: string;
   whatToDo: string[];
-  significance: "High" | "Low" | "Medium";
+  city: string;
+  image: string;
+  significance: string;
   coordinates: [number, number];
   topic: string;
   articles: Article[]
