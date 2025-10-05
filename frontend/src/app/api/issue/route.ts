@@ -1,14 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { mockData } from '@/lib/data/data';
-
 import { UserInfo } from '@/lib/types/user';
+import { getMockDataFromTopic } from '@/lib/data/fallback';
 
 export async function POST(request: NextRequest) {
+  let body: UserInfo | null = null;
+
   try {
-    const body: UserInfo = await request.json();
+    body = await request.json();
 
     // Make the request to your backend
-    const response = await fetch('http://localhost:8080/api/createissue', {
+    const response = await fetch('http://localhost:3000/api/createissue', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -17,7 +18,6 @@ export async function POST(request: NextRequest) {
     });
 
     const data = await response.json();
-    
     console.log('Response from backend:', data);
 
     if (!response.ok) {
@@ -30,6 +30,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(data, { status: 200 });
   } catch (error) {
     console.error('Error creating issue:', error);
-    return NextResponse.json(mockData, { status: 200 });
+    console.log('Falling back to mock data');
+
+    const topicMockData = getMockDataFromTopic(body?.topic ?? 'default');
+    return NextResponse.json(topicMockData, { status: 200 });
   }
 }

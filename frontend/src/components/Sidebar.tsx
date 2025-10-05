@@ -94,7 +94,7 @@ const Sidebar = () => {
                   >
                     {/* Search Category Dropdown */}
                     <div className="space-y-1">
-                      <label className="text-sm font-bold text-white block px-2">I&apos;m searching for...</label>
+                      <label className="text-sm font-bold text-white block px-2">I want to learn about...</label>
                       <select 
                         value={userInfo.topic}
                         onChange={(e) => handleChange('topic', e.target.value)}

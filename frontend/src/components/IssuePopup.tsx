@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Issue } from "@/lib/types/article";
 import ArticleCard from "@/components/ArticleCard";
 
-const IssuePopup = ({ title, summary, city, image, articles }: Issue ) => {
+const IssuePopup = ({ title, whatToDo, summary, city, image, articles }: Issue ) => {
   return (
     <motion.div 
       initial={{ width: 0 }}
@@ -26,10 +26,14 @@ const IssuePopup = ({ title, summary, city, image, articles }: Issue ) => {
             </div>
             <div className="space-y-6">
               <RevealAnimation delay={0.9}>
-                <h3 className="text-2xl font-bold">What You Can Do</h3>
+                <h3 className="text-2xl font-bold">How does this affect you?</h3>
               </RevealAnimation>
               <RevealAnimation delay={1.2}>
-                <p className="text-gray-300 text-base leading-relaxed">{summary}</p>
+                <ul className="text-gray-300 text-base leading-relaxed space-y-2">
+                  {whatToDo.map((item: string, index: number) => (
+                    <li key={index} className="list-disc list-inside">{item}</li>
+                  ))}
+                </ul>
               </RevealAnimation>
             </div>
           </div>

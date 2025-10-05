@@ -4,7 +4,7 @@ export type Issue = {
   whatToDo: string[];
   city: string;
   image: string;
-  significance: "High" | "Low" | "Medium";
+  significance: string;
   coordinates: [number, number];
   topic: string;
   articles: Article[]
