@@ -10,13 +10,14 @@ import { parseArticle } from "../functions";
 export async function createIssue(req: Request, res: Response) {
 
   const content : string = req.body.content;
+  console.log(content)
   const user : string = req.body.user;
   const publication : string = req.body.pub;
 
   try {
     const response = await AI.models.generateContent({
       model: "gemini-2.5-flash",
-      contents: content,
+      contents: [content],
       config: {
         systemInstruction: `Your name is Poly. You are an educator that is unbiased. 
         You are teaching the user about the content.
@@ -71,7 +72,7 @@ export async function createIssue(req: Request, res: Response) {
     });
 
     let data = JSON.parse(response.text || "{}")
-    res.json({ summary: data })
+    res.json({data})
   }
   catch (error) {
     console.error(error)
@@ -99,21 +100,23 @@ export async function URLReader(req: Request, res: Response) {
         `All information is from ${url}. Information that is returned should be found in the URL given. Format the response
         Content: Read the content in the article, DO NOT rephrase anything or add any extra words than what you have read.
         Take key parts of the article and create a chunk of text that is DIRECTLY quoted from the article. Text does not have
-        to be grammarly correct, it should not be quoted or annotated.
+        to be grammarly correct, it should not be quoted or annotated. Limit the amount of text to max 4 sentences.
+        DO NOT GO OVER 4 sentences.
         Bias: Analyze the bias of the article and catogorize it into a political view point. Progressive at 0 Conservative at 1.
         This should only be a number response, you have 2 significant figures. It does not have to be a good looking number.
-        Justification: Maximum 2 sentences on why you chose the bias number. You are allowed to interpret information here.
+        Justification: Maximum 1 sentence on why you chose the bias number. You are allowed to interpret information here.
+        DO NOT GO OVER 1 sentence.
         `,
       config: {
-        systemInstruction: `You are a reader, you do not form opinions. All you do is read and take key parts of an article.`,
+        systemInstruction: `You are a reader, you do not form opinions. All you do is read and take key parts of an article.
+        Make sure you follow sentence lengths. Only output Content, Bias & Justification. DO NOT OUT PUT INSTRUCTIONS`,
         tools: [{ urlContext: {} }],
       },
     });
-    console.log(response.text)
     if(response.text !== undefined){
-      const article : Bias | null = parseArticle(response.text);
+      const bias : Bias = parseArticle(response.text);
 
-      res.json({ article });
+      res.json({bias});
     }
     else{
       throw new Error("Cannot access site")

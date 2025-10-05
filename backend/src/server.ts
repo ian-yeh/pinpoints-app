@@ -19,9 +19,6 @@ app.post("/api/createissue", createNewIssue);
 app.use("/api/news", newsRouter);
 app.use("/api/gemini", geminiRouter);
 
-console.log(process.env.CURRENTS_API_KEY);
-console.log(process.env.GEMINI_API_KEY);
-
 export const AI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 app.listen(PORT, () => {

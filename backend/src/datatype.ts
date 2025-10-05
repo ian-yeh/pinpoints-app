@@ -34,7 +34,7 @@ export type UserInfo = {
 
 export type Bias = {
     content: string;
-    bias:number;
+    biasValue : number;
     justification: string;
 }
 
@@ -52,6 +52,7 @@ export type GeneratedIssue = {
     Suggestion: string;
     Siginificance: string;
     coords: Pair;
+    city: string;
 }
 
 export type Issue = {
@@ -60,5 +61,6 @@ export type Issue = {
     Suggestion: string;
     Significance: string;
     coords: Pair;
+    city: string;
     Articles: EvalArticle[];
 }

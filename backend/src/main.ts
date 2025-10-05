@@ -13,7 +13,7 @@ export async function createNewIssue(req: Request, res: Response) {
         topic: topic,
         schoolStatus: schoolStatus
     }
-    const urlAPI : string = `${host}/news/queried?country=${userInfo.country}&`
+    const urlAPI : string = `${host}/news/queried?country=${userInfo.country}&keyword=${topic}&from=${"2025-09-10"}`
     let articles : Article[];
     // takes topic & country
     try{
@@ -26,35 +26,49 @@ export async function createNewIssue(req: Request, res: Response) {
     }
     catch(Error){
         console.log(Error);
-        res.status(500).json({ message: "Error grabbing info from article" }) 
-        return // cannot continue without articles
+        return res.status(500).json({ message: "Error grabbing info from article" }) 
+        // cannot continue without articles
     }
-    let biasArticles : EvalArticle[] = new Array(0);
+    let biasArticles : EvalArticle[] = new Array;
     for(let i=0; i<articles.length; i++){
         let curArt : Article = articles[i]
-        const biasAPI : string = `${host}/gemini/article?q=${curArt.url}`
-        const response = await fetch(biasAPI);
-        if(!response.ok){
-            throw new Error(`Issue Reading Articles: ${response.status}`)
+        try{
+            const biasAPI : string = `${host}/gemini/article?url=${curArt.url}`
+            const response = await fetch(biasAPI);
+            if(!response.ok){
+                throw new Error(`Issue Reading Articles: ${response.status}`)
+            }
+            let data = await response.json()
+            let biasData : Bias = data.bias;
+            if(biasData !== null && biasData !== undefined && biasData.biasValue !== undefined){
+                let art : EvalArticle = {
+                    url: curArt.url,
+                    title: curArt.title,
+                    publication: curArt.publishedAt,
+                    topic: userInfo.topic,
+                    bias: biasData
+                }                
+                biasArticles.push(art);
+            }
+            else {
+                console.log(`Article: ${i} had a generation error`);
+                throw new Error(`Article: ${i} had a generation error`);
+            }
         }
-        const biasData : Bias = await response.json();
-        
-        let art : EvalArticle = {
-            url: curArt.url,
-            title: curArt.title,
-            publication: curArt.publishedAt,
-            topic: userInfo.topic,
-            bias: biasData
+        catch(Error){
+            console.log(Error);
+            continue;
         }
+    }
 
-        biasArticles.push(art);
-
+    if (!biasArticles.length) {
+        return res.status(500).json({ message: "No valid bias articles found" });
     }
 
     // find closest neutral score 0.5 = neutrals
     let maxi : number = 0;
-    for(let i=0; i<articles.length; i++){
-        if(Math.abs(biasArticles[i].bias.bias - 0.5) < Math.abs(biasArticles[maxi].bias.bias - 0.5)){
+    for(let i=0; i<biasArticles.length; i++){
+        if(Math.abs((biasArticles[i].bias.biasValue) - 0.5) < Math.abs((biasArticles[maxi].bias.biasValue) - 0.5)){
             maxi = i;
         }
     }
@@ -62,14 +76,25 @@ export async function createNewIssue(req: Request, res: Response) {
     let userInfoString :string[] = Object.values(userInfo);
     let userString : string = ""
     for(let i=0; i<userInfoString.length; i++){
-        userString+=userInfoString[i];
+        userString+=`${userInfoString[i]},`;
     }
 
     const bestArticle : EvalArticle = biasArticles[maxi];
-    const articleContext : string = `${host}/gemini/article?content=${bestArticle.bias.content}&user=${userString}&pub=${bestArticle.publication}`
+    const articleContext : string = `${host}/gemini/issue`;
+    const bodydata = {
+        content: bestArticle.bias.content,
+        user: userString,
+        pub: bestArticle.publication
+    }
 
     try {
-        const response = await fetch(articleContext);
+        const response = await fetch(articleContext, {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json"
+            },
+            body: JSON.stringify(bodydata)
+        });
         if(!response.ok){
             throw new Error(`Issue Generating Issue: ${response.status}`);
         }
@@ -80,6 +105,7 @@ export async function createNewIssue(req: Request, res: Response) {
             Suggestion: data.Suggestion,
             Significance: data.Siginificance,
             coords: data.coords,
+            city: data.city,
             Articles: biasArticles
         }
         res.json({Issue});
