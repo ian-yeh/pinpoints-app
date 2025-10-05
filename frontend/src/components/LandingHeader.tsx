@@ -11,13 +11,8 @@ export default function Header() {
       <nav>
         <ul className="flex gap-6 text-lg tracking-wide">
           <li>
-            <Link href="/about" className="hover:text-gray-400 transition-colors">
-              About
-            </Link>
-          </li>
-          <li>
             <a 
-              href="https://github.com" 
+              href="https://github.com/ian-yeh/pinpoints-app" 
               target="_blank" 
               rel="noopener noreferrer"
               className="hover:text-gray-400 transition-colors"

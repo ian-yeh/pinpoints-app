@@ -9,6 +9,7 @@ import { useUser } from '@/lib/hooks/useUser';
 
 import { motion } from 'framer-motion';
 
+
 const MapController = ({ disabled }: { disabled: boolean }) => {
   const map = useMap();
 
@@ -119,6 +120,7 @@ const Map = () => {
           eventHandlers={{
             click: () => setSelectedIssue(point),
           }}
+          
         />
       ))}
 
